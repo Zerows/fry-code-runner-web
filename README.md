@@ -16,6 +16,6 @@ docker-compose ps (Check Status of the containers)
 
 docker exec -it postgres bash (To log into postgres container)
 
-docker exec -it code-fry-app bash (To log into tagging-poc container)
+docker exec -it code-fry-app bash (To log into code-fry-app container)
 
 docker-compose build (To build new images (run if you made any changes in your dockerfile))
