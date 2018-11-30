@@ -1,3 +1,3 @@
 > bundle install
 
-> ember rake:install
+> rake ember:install
