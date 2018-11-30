@@ -11,6 +11,12 @@ services:
       - "3000:3000"
     links:
       - db
+      - rmq
+  rmq:
+    image: rabbitmq
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"
   db:
     image: postgres
     restart: always
