@@ -2,7 +2,7 @@ require 'bunny'
 
 namespace :rmq do
   task :publish do
-    conn = Bunny.new
+    conn = Bunny.new(:host => "rabbitmq")
     conn.start
     ch = conn.create_channel
     q  = ch.queue("rpc_queue", :auto_delete => true)
