@@ -8,6 +8,6 @@ RUN apt-get install -y nodejs
 RUN npm install -g ember-cli
 RUN rake ember:install
 EXPOSE 3000
-CMD ["rails", "s"]
-
+EXPOSE 5672
+EXPOSE 6379
 
