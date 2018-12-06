@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181203150116) do
+ActiveRecord::Schema.define(version: 20181206083347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "results", force: :cascade do |t|
+    t.string "output"
+    t.string "error"
+    t.bigint "submission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submission_id"], name: "index_results_on_submission_id"
+  end
 
   create_table "submissions", force: :cascade do |t|
     t.text "content"
@@ -24,4 +33,5 @@ ActiveRecord::Schema.define(version: 20181203150116) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "results", "submissions"
 end
