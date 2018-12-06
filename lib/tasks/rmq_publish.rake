@@ -5,7 +5,6 @@ namespace :rmq do
     conn = Bunny.new(:host => "rabbitmq")
     conn.start
     ch = conn.create_channel
-    Result.Submission.find_all.first.
     s = Submission.new({filename: "HelloWorld.java", content: "public class HelloWorld { public static void main(String[] args){System.out.println(\"Hello, World Java\");}}", language: "java"})
     s.save!
     q = ch.queue("rpc_queue",{:auto_delete => false, durable: true, exclusive: false})
