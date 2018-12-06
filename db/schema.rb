@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 20181206083347) do
     t.index ["submission_id"], name: "index_results_on_submission_id"
   end
 
-  create_table "submission", id: :serial, force: :cascade do |t|
-    t.jsonb "output", null: false
-    t.text "language", null: false
-    t.text "filename", null: false
-    t.text "content", null: false
-  end
-
   create_table "submissions", force: :cascade do |t|
     t.text "content"
     t.string "language"

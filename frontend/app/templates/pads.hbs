@@ -1,0 +1,9 @@
+<h2>List of Pads</h2>
+<ul>
+  {{#each model as |scientist|}}
+    <li>{{scientist}}</li>
+  {{/each}}
+</ul>
+
+<h3><button {{action "click"}}>CLick Me</button></h3>
+{{outlet}}
