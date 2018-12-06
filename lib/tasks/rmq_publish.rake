@@ -1,17 +1,17 @@
 require 'bunny'
 
 namespace :rmq do
-  task :publish do
-    conn = Bunny.new(:host => "localhost")
+  task :publish => [:environment] do
+    conn = Bunny.new(:host => "rabbitmq")
     conn.start
     ch = conn.create_channel
-
-    q  = ch.queue("rpc_queue",{:auto_delete => false, durable: true, exclusive: false})
-    (1..10).each do |i|
-      #write to postgres submissions db
-      q.publish(JSON.generate({jobId: i}), :routing_key => q.name)
-    end
+    Result.Submission.find_all.first.
+    s = Submission.new({filename: "HelloWorld.java", content: "public class HelloWorld { public static void main(String[] args){System.out.println(\"Hello, World Java\");}}", language: "java"})
+    s.save!
+    q = ch.queue("rpc_queue",{:auto_delete => false, durable: true, exclusive: false})
+    q.publish(JSON.generate({jobId: s.id}), :routing_key => q.name)
     # close the connection
+    ch.close
     conn.stop
   end
 end
