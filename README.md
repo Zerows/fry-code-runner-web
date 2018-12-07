@@ -19,3 +19,12 @@ docker exec -it postgres bash (To log into postgres container)
 docker exec -it code-fry-app bash (To log into code-fry-app container)
 
 docker-compose build (To build new images (run if you made any changes in your dockerfile))
+
+
+## Rake commands to setup the app
+
+1. docker exec -it code-fry-app bash (To log into code-fry-app container)
+2. rake db:create
+3. rake db:migrate
+4. bundle exec rspec (to execute rspec tests) 
+5. rake rmq:publish (to publish messages to queue)
