@@ -10,7 +10,7 @@ export default Controller.extend({
         language: newPad,
         filename: newPad
       });
-      newRecord.save()
+      newRecord.save();
     },
 
     updatePad() {

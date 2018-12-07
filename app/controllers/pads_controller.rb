@@ -4,17 +4,18 @@ class PadsController < ApplicationController
   end
 
   def show_pad
-    render :json => {:success => 'trueeeeee'}
+    pad = Pad.find(params[:pad_id])
+    render json: pad
   end
 
   def create
-    puts pads_params.to_json
-    @pad = Pad.create!(pads_params)
-    render :json => {:created => 'true'}
+    pad = Pad.create!(pads_params)
+    puts pad.to_json
+    render json: pad
   end
 
   def update
-    @pad.update(params)
+    Pad.find(params[:id]).update(params)
     head :no_content
   end
 
