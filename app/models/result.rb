@@ -1,3 +1,3 @@
 class Result < ApplicationRecord
-  belongs_to :submission
+  belongs_to :pad
 end
