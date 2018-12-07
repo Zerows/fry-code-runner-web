@@ -8,12 +8,18 @@ class PadsController < ApplicationController
   end
 
   def create
-    @pad = Pad.create!(params)
+    puts 'xxxxxyyzzz'
+    puts pads_params.to_json
+    @pad = Pad.create!(pads_params)
     render :json => {:created => 'true'}
   end
 
   def update
     @pad.update(params)
     head :no_content
+  end
+
+  def pads_params
+    params.permit(:data, attributes: [:content, :language, :filename])
   end
 end

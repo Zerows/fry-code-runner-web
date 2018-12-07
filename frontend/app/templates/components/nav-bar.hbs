@@ -1,5 +1,12 @@
-<nav>
-  {{#link-to "index"}}Home{{/link-to}}
-  {{#link-to "pads"}}Pads{{/link-to}}
-</nav>
+{{#bs-navbar type="light" backgroundColor="primary" collapsed=collapsed as |navbar|}}
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand"}}Code Fry{{/link-to}}
+  </div>
+  {{#navbar.content}}
+    {{#navbar.nav as |nav|}}
+      {{#nav.item}}{{#nav.link-to "pads"}}Pads{{/nav.link-to}}{{/nav.item}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}
 {{yield}}
