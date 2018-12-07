@@ -10,7 +10,9 @@ export default Controller.extend({
         language: newPad,
         filename: newPad
       });
-      newRecord.save();
+      newRecord.save().then((record) => {
+        this.transitionToRoute('pads-show', record.get('id'))
+      });
     },
 
     updatePad() {

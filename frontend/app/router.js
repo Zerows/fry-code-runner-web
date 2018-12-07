@@ -7,9 +7,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('pads', function() {
-    this.route('show', { path: '/:pad_id' });
-  });
+  this.route('pads', { path: '/pads' });
+  this.route('pads-show', { path: '/pads/:pad_id' });
 });
 
 export default Router;

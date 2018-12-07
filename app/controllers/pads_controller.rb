@@ -5,13 +5,13 @@ class PadsController < ApplicationController
 
   def show_pad
     pad = Pad.find(params[:pad_id])
-    render json: pad
+    render :json => pad.as_json
   end
 
   def create
     pad = Pad.create!(pads_params)
     puts pad.to_json
-    render json: pad
+    render :json => pad.as_json
   end
 
   def update
