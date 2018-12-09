@@ -3,24 +3,16 @@ import Controller from '@ember/controller';
 export default Controller.extend({
   actions: {
     createPad() {
-      //let newPad = this.get('newPad');
-      let newPad = "test";
+      let language = "javascript";
+      let filename = "code-fry-"+new Date().getTime().toString();
       let newRecord = this.store.createRecord('pad', {
-        content: newPad,
-        language: newPad,
-        filename: newPad
+        content: "",
+        language: language,
+        filename: filename
       });
       newRecord.save().then((record) => {
         this.transitionToRoute('pads-show', record.get('id'))
       });
-    },
-
-    updatePad() {
-      // hard coding the id for demonstration purposes only
-      let updatedPad = this.get('updatedPad');
-      let pad = this.get('model').findBy('id', '1');
-      pad.set('content', updatedPad);
-      pad.save()
     },
 
     deletePad(pad) {

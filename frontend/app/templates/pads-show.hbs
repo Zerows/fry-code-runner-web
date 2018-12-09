@@ -1,5 +1,11 @@
 <div class="code-editor">
-  {{#ember-ace mode="ace/mode/javascript" as |editor|}}
-
-  {{/ember-ace}}
+  <select onchange={{action (mut model.language) value="target.value"}}>
+    {{#each supportedLanguages as |rec|}}
+      <option selected={{eq rec model.language}} value={{rec}}>{{rec}}</option>
+    {{/each}}
+  </select>
+  {{#bs-button type="warning" onClick=(action "submitPad" model)}}
+    Submit
+  {{/bs-button}}
+  {{ember-ace mode=(concat "ace/mode/" model.language) value=model.content update=(action (mut model.content))}}
 </div>

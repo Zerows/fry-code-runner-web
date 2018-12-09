@@ -16,7 +16,7 @@ class PadsController < ApplicationController
   end
 
   def update
-    Pad.find(params[:pad_id]).update(params)
+    Pad.find(params[:pad_id]).update(pads_params)
     head :no_content
   end
 
