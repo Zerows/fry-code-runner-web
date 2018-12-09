@@ -1,6 +1,10 @@
-.ace_editor {
-  height: 95vh;
-  width: 50vw;
+.code-editor {
   border-right: 2px gray solid;
   border-bottom: 2px gray solid;
+}
+
+.code-output {
+  vertical-align: top;
+  color: whitesmoke;
+  background: black;
 }

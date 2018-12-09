@@ -4,4 +4,5 @@ export default DS.Model.extend({
   content: DS.attr('string'),
   language: DS.attr('string'),
   filename: DS.attr('string'),
+  result_id: DS.attr(),
 });

@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     delete '/:pad_id' ,:action => 'delete' , :as => 'delete_pad'
   end
 
+  scope 'api/results' , :controller => 'results' do
+    get '/:result_id' ,:action => 'get_result' , :as => 'get_result'
+  end
+
   mount_ember_app :frontend, to: "/"
 end

@@ -17,7 +17,10 @@ class PadsController < ApplicationController
 
   def update
     Pad.find(params[:pad_id]).update(pads_params)
-    head :no_content
+    result = Result.create!({:pad_id => params[:pad_id]})
+    msg = {:id => params[:pad_id], :result_id => result[:id]}
+    Publisher.publish(msg)
+    render :json => {:pad => msg}.as_json
   end
 
   def delete
