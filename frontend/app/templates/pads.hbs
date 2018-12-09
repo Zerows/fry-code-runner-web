@@ -1,19 +1,23 @@
-<br><br>
-<ul>
-  {{#each model as |rec|}}
-    <ul>
-      <li>
-        {{#link-to "pads-show" rec.id}}{{ concat rec.filename rec.id}}{{/link-to}}
-        {{#bs-button type="danger" onClick=(action "deletePad" rec)}}
-          Delete Pad
-        {{/bs-button}}
-      </li>
-    </ul>
-  {{/each}}
-</ul>
-<br><br>
-{{#bs-button type="success" onClick=(action "createPad")}}
-  Create Pad
-{{/bs-button}}
-
-{{outlet}}
+<div class="m-3">
+  {{#bs-button type="success" onClick=(action "createPad")}}
+    Create Pad
+  {{/bs-button}}
+</div>
+<div class="mt-5 m-3">
+  <h3>List of Pads</h3>
+  <ul>
+    {{#each model as |rec|}}
+      <ul>
+        <li class="col-6">
+          <div class="pad-card">
+            {{#link-to "pads-show" rec.id}}{{ concat rec.filename }}{{/link-to}}
+            <span>{{rec.language}}</span>
+            {{#bs-button outline=true type="danger" onClick=(action "deletePad" rec)}}
+              Delete Pad
+            {{/bs-button}}
+          </div>
+        </li>
+      </ul>
+    {{/each}}
+  </ul>
+</div>

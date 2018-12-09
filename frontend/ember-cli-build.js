@@ -10,7 +10,7 @@ module.exports = function(defaults) {
       'importBootstrapCSS': true
     },
     ace: {
-      themes: ['ambiance', 'chaos'],
+      themes: ['monokai'],
       modes: ['javascript', 'ruby', 'python', 'java'],
       workers: ['javascript', 'ruby', 'python', 'java']
     }
