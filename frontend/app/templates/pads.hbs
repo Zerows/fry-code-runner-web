@@ -1,4 +1,17 @@
 <br><br>
+<ul>
+  {{#each model as |rec|}}
+    <ul>
+      <li>
+        {{#link-to "pads-show" rec.id}}{{ concat rec.filename rec.id}}{{/link-to}}
+        {{#bs-button type="danger" onClick=(action "deletePad" rec)}}
+          Delete Pad
+        {{/bs-button}}
+      </li>
+    </ul>
+  {{/each}}
+</ul>
+<br><br>
 {{#bs-button type="success" onClick=(action "createPad")}}
   Create Pad
 {{/bs-button}}

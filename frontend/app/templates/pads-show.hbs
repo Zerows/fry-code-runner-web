@@ -1,10 +1,5 @@
-<div>
-  TESTSTST
+<div class="code-editor">
+  {{#ember-ace mode="ace/mode/javascript" as |editor|}}
+
+  {{/ember-ace}}
 </div>
-{{model.content}}
-{{#each pad in model}}
-  <li>
-    <div>{{pad.content}}</div>
-  </li>
-{{/each}}
-{{outlet}}

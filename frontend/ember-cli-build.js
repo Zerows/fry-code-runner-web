@@ -8,6 +8,11 @@ module.exports = function(defaults) {
       'bootstrapVersion': 4,
       'importBootstrapFont': false,
       'importBootstrapCSS': true
+    },
+    ace: {
+      themes: ['ambiance', 'chaos'],
+      modes: ['javascript', 'ruby', 'python', 'java'],
+      workers: ['javascript', 'ruby', 'python', 'java']
     }
   });
 

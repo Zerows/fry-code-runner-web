@@ -22,5 +22,9 @@ export default Controller.extend({
       pad.set('content', updatedPad);
       pad.save()
     },
+
+    deletePad(pad) {
+      pad.destroyRecord();
+    }
   }
 });
