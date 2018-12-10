@@ -1,7 +1,9 @@
 <table style="width:100%;height:100%">
   <tr>
     <th class="code-editor">
+      {{load-spinner show=showLoader}}
       <div class="m-3 code-editor-controls">
+
         {{#bs-button type="warning" onClick=(action "submitPad" model)}}
           Submit
         {{/bs-button}}
@@ -16,8 +18,8 @@
                   value=model.content update=(action (mut model.content))}}
     </th>
     <th class="code-output">
-      {{#result-container resultId=model.result_id padId=model.id}}
-        {{load-spinner show=showLoader}}
+      {{#result-container resultId=model.result_id padId=model.id removeLoader=(action 'removeLoader')}}
+
       {{/result-container}}
     </th>
   </tr>
