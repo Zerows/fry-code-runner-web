@@ -11,12 +11,14 @@ export default Component.extend({
 
       let poll = setInterval(() => {
         let result = this.store.findRecord('result', resultId);
-        if(this.get('output') !== null || this.get('error') !== null) {
-          this.set('error', result.error);
-          this.set('output', result.output);
-          this.sendAction('removeLoader');
-          poll.clearInterval;
-        }
+        result.then((data) => {
+          if(data.output !== null || data.error !== null) {
+            this.set('error', data.error);
+            this.set('output', data.output);
+            clearInterval(poll);
+            this.removeLoader()
+          }
+        })
       }, 500);
 
   }
