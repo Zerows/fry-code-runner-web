@@ -17,6 +17,7 @@
     </th>
     <th class="code-output">
       {{#result-container resultId=model.result_id padId=model.id}}
+        {{load-spinner show=showLoader}}
       {{/result-container}}
     </th>
   </tr>
