@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   mount_ember_app :frontend, to: "/"
 
   scope 'api' do
+    post 'auth/login', to: 'authentication#authenticate'
+    post 'signup', to: 'users#create'
+
     scope 'pads', controller: 'pads' do
       get "/", :action => 'index', :as => 'pads_dashboard'
       post "/", :action => 'create', :as => 'create_pad'
