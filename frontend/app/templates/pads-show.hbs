@@ -1,13 +1,10 @@
-<table style="width:100%;height:100%">
-  <tr>
-    <th class="code-editor">
+<div>
+  <div class="col-6 d-inline">
+    <div class="code-editor d-inline-block">
       {{load-spinner show=showLoader}}
       <div class="m-3 code-editor-controls">
-
-        {{#bs-button type="warning" onClick=(action "submitPad" model)}}
-          Submit
-        {{/bs-button}}
-        <select onchange={{action (mut model.language) value="target.value"}}>
+        <input type="text" class="pad-title" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
+        <select disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
           {{#each supportedLanguages as |rec|}}
             <option selected={{eq rec model.language}} value={{rec}}>{{rec}}</option>
           {{/each}}
@@ -16,11 +13,18 @@
       {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
                   lines=30 mode=(concat "ace/mode/" model.language)
                   value=model.content update=(action (mut model.content))}}
-    </th>
-    <th class="code-output">
+    </div>
+  </div>
+  <div class="col-5 d-inline">
+    <div class="code-output d-inline-block">
       {{#result-container resultId=model.result_id padId=model.id removeLoader=(action 'removeLoader')}}
 
       {{/result-container}}
-    </th>
-  </tr>
-</table>
+    </div>
+  </div>
+  <div class="m-3 text-center">
+    {{#bs-button disabled=showLoader type="warning" onClick=(action "submitPad" model)}}
+      Submit
+    {{/bs-button}}
+  </div>
+</div>
