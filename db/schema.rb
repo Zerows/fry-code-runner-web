@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181212111057) do
+ActiveRecord::Schema.define(version: 20181212141337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,6 @@ ActiveRecord::Schema.define(version: 20181212111057) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.index ["pad_id"], name: "index_results_on_pad_id"
-  end
-
-  create_table "submissions", id: :serial, force: :cascade do |t|
-    t.text "language", null: false
-    t.text "filename", null: false
-    t.text "content", null: false
   end
 
   add_foreign_key "results", "pads"
