@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('pads', { path: '/pads' });
   this.route('pads-show', { path: '/pads/:pad_id' });
+  this.route('login');
 });
 
 export default Router;

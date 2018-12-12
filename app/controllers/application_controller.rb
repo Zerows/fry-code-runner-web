@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::API
-  def render_404
-    render :json => {:error => "not-found"}.to_json, :status => 404
+  include Response
+  include ExceptionHandler
+
+  attr_reader :current_user
+
+  private
+
+  # Check for valid request token and return user
+  def authorize_request
+    @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
   end
 end

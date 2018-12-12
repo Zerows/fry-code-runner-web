@@ -56,5 +56,7 @@ RSpec.configure do |config|
       example.run
     end
   end
-  # [...]
+
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 end

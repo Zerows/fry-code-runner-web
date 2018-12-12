@@ -1,6 +1,9 @@
 class PadsController < ApplicationController
+
+  before_action :authorize_request
+
   def index
-    pads = Pad.take(10)
+    pads = current_user.pads.take(10)
     render :json => {:pads => pads}.as_json
   end
 
@@ -10,7 +13,7 @@ class PadsController < ApplicationController
   end
 
   def create
-    pad = Pad.create!(pads_params)
+    pad = current_user.pads.create!(pads_params)
     puts pad.to_json
     render :json => {:pad => pad}.as_json
   end
