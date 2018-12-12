@@ -6,6 +6,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g ember-cli
 RUN rake ember:install
+RUN cd frontend && npm install
 EXPOSE 3000
 EXPOSE 5672
 EXPOSE 6379
