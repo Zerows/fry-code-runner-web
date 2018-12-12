@@ -1,4 +1,7 @@
 class PadsController < ApplicationController
+
+  before_action :authorize_request
+
   def index
     pads = current_user.pads.take(10)
     render :json => {:pads => pads}.as_json

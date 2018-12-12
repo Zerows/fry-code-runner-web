@@ -5,8 +5,12 @@
   </div>
   {{#navbar.content}}
     {{#navbar.nav as |nav|}}
-      {{#nav.item}}{{#nav.link-to "pads"}}Pads{{/nav.link-to}}{{/nav.item}}
+      {{#if session.isAuthenticated}}
+        {{#nav.item}}{{#nav.link-to "pads"}}Pads{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item onClick=(action "logout")}}Logout{{/nav.item}}
+      {{else}}
+        {{#nav.item}}{{#nav.link-to "login"}}Login{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
     {{/navbar.nav}}
   {{/navbar.content}}
 {{/bs-navbar}}
-{{yield}}

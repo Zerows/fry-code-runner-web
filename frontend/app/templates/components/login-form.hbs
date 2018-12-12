@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Login</h5>
+    {{#bs-form formLayout=formLayout model=this onSubmit=(action "login") as |form|}}
+      {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
+      {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true helpText="Minimum 6 characters"}}
+      {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+    {{/bs-form}}
+
+    {{#if errorMessage}}
+      <div class="alert alert-danger">
+        <strong>Login failed:</strong> {{errorMessage}}
+      </div>
+    {{/if}}
+  </div>
+</div>
