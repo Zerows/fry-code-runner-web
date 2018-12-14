@@ -1,11 +1,14 @@
-import Ember from 'ember';
 import Base from 'ember-simple-auth/authenticators/base';
+import {Promise, resolve} from 'rsvp';
+import {isEmpty} from '@ember/utils'
+import $ from 'jquery'
+import {run} from '@ember/runloop'
 
 export default Base.extend({
   tokenEndpoint: 'http://localhost:3000/api/auth/login',
-  restore: function(data) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!Ember.isEmpty(data.token)) {
+  restore: function (data) {
+    return Promise(function (resolve, reject) {
+      if (!isEmpty(data.token)) {
         resolve(data);
       } else {
         reject();
@@ -13,9 +16,9 @@ export default Base.extend({
     });
   },
 
-  authenticate: function(options) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      Ember.$.ajax({
+  authenticate: function (options) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
         url: this.tokenEndpoint,
         type: 'POST',
         data: JSON.stringify({
@@ -24,23 +27,22 @@ export default Base.extend({
         }),
         contentType: 'application/json;charset=utf-8',
         dataType: 'json'
-      }).then(function(response) {
-        Ember.run(function() {
+      }).then(function (response) {
+        run(function () {
           resolve({
             token: response.auth_token
           });
         });
-      }, function(xhr, status, error) {
-        var response = xhr.responseText;
-        Ember.run(function() {
+      }, function (xhr, status, error) {
+        let response = xhr.responseText;
+        run(function () {
           reject(response);
         });
       });
     });
   },
 
-  invalidate: function() {
-    console.log('invalidate...');
-    return Ember.RSVP.resolve();
+  invalidate: function () {
+    return resolve();
   }
 });
