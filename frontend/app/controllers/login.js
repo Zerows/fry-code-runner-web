@@ -9,7 +9,7 @@ export default Controller.extend({
       this.get('session').authenticate('authenticator:custom', credentials).then(() => {
         this.transitionToRoute("pads");
       }).catch((message) => {
-        this.set('errorMessage', message);
+        this.set('error', message);
       });
     }
   }

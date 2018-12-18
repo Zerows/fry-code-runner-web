@@ -1,12 +1,14 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  supportedLanguages: ['java', 'javascript', 'python', 'ruby'],
   showLoader: false,
+  init() {
+    this._super(...arguments)
+    this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
+  },
   actions: {
     submitPad(pad) {
-      let padResult = pad.save();
-      // show loader
+      pad.save();
       this.set('showLoader', true);
     },
     removeLoader() {
