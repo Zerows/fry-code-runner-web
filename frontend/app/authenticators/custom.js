@@ -7,7 +7,7 @@ import {run} from '@ember/runloop'
 export default Base.extend({
   tokenEndpoint: 'http://localhost:3000/api/auth/login',
   restore: function (data) {
-    return Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
       if (!isEmpty(data.token)) {
         resolve(data);
       } else {
