@@ -1,0 +1,31 @@
+<div>
+  <div class="row">
+    <div class="col-6">
+      <div class="code-editor d-inline-block">
+        <div class="m-3 code-editor-controls">
+          <input type="text" class="pad-title" value={{model.title}} onchange={{action (mut model.title) value="target.value"}}>
+          <select disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
+            {{#each supportedLanguages as |rec|}}
+              <option selected={{eq rec model.language}} value={{rec}}>{{rec}}</option>
+            {{/each}}
+          </select>
+        </div>
+        {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
+                    lines=30 mode=(concat "ace/mode/" model.language)
+                    value=model.content update=(action (mut model.content))}}
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="code-output d-inline-block">
+        {{#result-container resultId=model.result_id padId=model.id}}
+
+        {{/result-container}}
+      </div>
+    </div>
+  </div>
+  <div class="m-3 text-center">
+    {{#bs-button disabled=showLoader type="warning" onClick=(action "saveQuestion" model)}}
+      Save Question
+    {{/bs-button}}
+  </div>
+</div>

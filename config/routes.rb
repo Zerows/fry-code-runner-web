@@ -15,12 +15,12 @@ Rails.application.routes.draw do
       delete '/:pad_id', :action => 'delete', :as => 'delete_pad'
     end
 
-    scope 'quests', controller: 'questions' do
-      get "/", :action => 'index', :as => 'pads_dashboard'
-      post "/", :action => 'create', :as => 'create_pad'
-      get '/:pad_id', :action => 'show_question', :as => 'show_question'
-      put '/:pad_id', :action => 'update', :as => 'update_pad'
-      delete '/:pad_id', :action => 'delete', :as => 'delete_pad'
+    scope 'questions', controller: 'questions' do
+      get "/", :action => 'index', :as => 'questions_dashboard'
+      post "/", :action => 'create', :as => 'create_question'
+      get '/:question_id', :action => 'show_question', :as => 'show_question'
+      put '/:question_id', :action => 'update', :as => 'update_question'
+      delete '/:question_id', :action => 'delete', :as => 'delete_question'
     end
 
     scope 'results', controller: 'results' do

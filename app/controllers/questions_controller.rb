@@ -3,8 +3,8 @@ class QuestionsController < ApplicationController
   before_action :authorize_request
 
   def index
-    questions = current_user.questions.take(10)
-    render :json => {:pads => questions}.as_json
+    questions = Question.take(10)
+    render :json => {:questions => questions}.as_json
   end
 
   def show_question
@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = current_user.questions.create!(question_params)
+    question = Question.create!(question_params)
     puts question.to_json
     render :json => {:question => question}.as_json
   end
@@ -29,6 +29,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :title)
+    params.require(:question).permit(:content, :title, :language)
   end
 end

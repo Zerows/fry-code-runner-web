@@ -23,6 +23,9 @@
   border: none;
   width: 50%;
 }
+.nav-item {
+  cursor: pointer;
+}
 
 .lds-roller {
   display: inline;
