@@ -28,3 +28,11 @@ docker-compose build (To build new images (run if you made any changes in your d
 3. rake db:migrate
 4. bundle exec rspec (to execute rspec tests) 
 5. rake rmq:publish (to publish messages to queue)
+
+## Debug
+
+> bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- /app/bin/rails s -b 0.0.0.0 -p 3000 -e development
+
+> Expose   - "1234:1234" for web on docker compose.
+
+> Edit Config -> Add Remote ruby config -> ![Run Config Image](readme/images/remote_debug_config.png)
