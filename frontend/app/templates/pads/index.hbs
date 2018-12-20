@@ -10,7 +10,7 @@
       <ul>
         <li class="col-6">
           <div class="pad-card">
-            {{#link-to "pads-show" rec.id}}{{ concat rec.filename }}{{/link-to}}
+            {{#link-to 'pads.show' rec}}{{ concat rec.filename }}{{/link-to}}
             <span>{{rec.language}}</span>
             {{#bs-button outline=true type="danger" onClick=(action "deletePad" rec)}}
               Delete Pad
