@@ -9,6 +9,9 @@ module.exports = function(defaults) {
       'importBootstrapFont': false,
       'importBootstrapCSS': true
     },
+    sassOptions: {
+      extension: 'scss'
+    },
     ace: {
       themes: ['monokai'],
       modes: ['javascript', 'ruby', 'python', 'java'],
