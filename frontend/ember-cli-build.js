@@ -6,11 +6,14 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     'ember-bootstrap': {
       'bootstrapVersion': 4,
-      'importBootstrapFont': false,
-      'importBootstrapCSS': true
+      'importBootstrapCSS': false
     },
     sassOptions: {
       extension: 'scss'
+    },
+    'ember-font-awesome': {
+      useScss: true, // for ember-cli-sass
+      includeComponent: true
     },
     ace: {
       themes: ['monokai'],
