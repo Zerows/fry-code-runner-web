@@ -1,24 +1,33 @@
-<div>
-  <div class="row">
+<div class='pad-content'>
+  <div class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
     <div class="col-6">
-      <div class="code-editor d-inline-block">
-        {{load-spinner show=showLoader}}
-        <div class="m-3 code-editor-controls">
-          <input type="text" class="pad-title" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
-          <select class="custom-select custom-select-sm col-2" disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
-            {{#each supportedLanguages as |rec|}}
-              <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
-            {{/each}}
-          </select>
-        </div>
-        {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-                    lines=30 mode=(concat "ace/mode/" model.language)
-                    value=model.content update=(action (mut model.content))}}
+      <div class="m-2 code-editor-controls">
+        <input type="text" class="title" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
+        <select class="custom-select custom-select-sm col-2" disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
+          {{#each supportedLanguages as |rec|}}
+          <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
+          {{/each}}
+        </select>
       </div>
     </div>
     <div class="col-6">
-      <div class="code-output d-inline-block">
-        {{#result-container resultId=model.result_id padId=model.id removeLoader=(action 'removeLoader')}}
+      <div class="result m-2">
+        <h3 class="title">Output Console:</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row monokai-bg p-1">
+    <div class="col-6">
+      {{load-spinner show=showLoader}}
+      {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
+      lines=30 mode=(concat "ace/mode/" model.language)
+      value=model.content update=(action (mut model.content))}}
+    </div>
+    <div class="col-6 no-padding">
+      <div>
+        {{#result-container class='code-output' resultId=model.result_id padId=model.id removeLoader=(action
+        'removeLoader')}}
 
         {{/result-container}}
       </div>
@@ -26,7 +35,7 @@
   </div>
   <div class="m-3 text-center">
     {{#bs-button type="success btn-lg" onClick=(action "submitPad" model)}}
-      Submit
+    Submit
     {{/bs-button}}
   </div>
 </div>

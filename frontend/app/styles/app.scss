@@ -2,6 +2,7 @@
 @import "ember-bootstrap/bootstrap";
 @import "loader";
 @import "font-awesome";
+@import "variables";
 
 .code-editor {
   width: 100%;
@@ -18,13 +19,22 @@
   justify-content: space-between;
   align-items: center;
 }
-.code-output {
-  width: 100%;
-  height: 100%;
-  vertical-align: top;
-  background: aliceblue;
+.monokai-bg{
+  background:$monokai-bg;
 }
-.pad-title {
-  border: none;
-  width: 50%;
+
+.pad-content{
+  .title{
+    @extend .bg-dark;
+    color: $light;
+    border: none;
+  }
+}
+.result{
+  .title{
+    color: $light;
+  }
+  .output {
+    color: $light;
+  }
 }
