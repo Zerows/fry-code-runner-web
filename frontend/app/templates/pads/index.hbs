@@ -1,10 +1,12 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-end">
     <div class="m-3">
-      {{#bs-button type="success" onClick=(action "createPad")}}
+      {{#bs-button class='pull-right' type="success" onClick=(action "createPad")}}
       Create Pad
       {{/bs-button}}
     </div>
+  </div>
+  <div class="row">
     <table class="table">
       <thead>
         <tr>
@@ -19,7 +21,7 @@
         <tr>
           <td scope="col">{{index}}</td>
           <td scope="col">{{#link-to 'pads.show' rec}}{{ concat rec.filename }}{{/link-to}}</td>
-          <td scope="col">{{rec.language}}</td>
+          <td scope="col">{{capitalize rec.language}}</td>
           <td scope="col">
             {{#bs-button outline=true type="danger" onClick=(action "deletePad" rec)}}
             {{fa-icon 'trash'}}
