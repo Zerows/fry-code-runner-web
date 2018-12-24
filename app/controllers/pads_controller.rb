@@ -7,7 +7,7 @@ class PadsController < ApplicationController
     render :json => pads
   end
 
-  def show_pad
+  def show
     pad = Pad.find(params[:pad_id])
     render json: pad
   end
@@ -17,12 +17,19 @@ class PadsController < ApplicationController
     render json: pad
   end
 
-  def update
-    Pad.find(params[:pad_id]).update(pads_params)
-    result = Result.create!({:pad_id => params[:pad_id]})
+  def submit
+    pad = Pad.find(params[:pad_id])
+    pad.update(pads_params)
+
+    result = Result.new
+    result.pad = pad
+    result.save
+
     msg = {:id => params[:pad_id], :result_id => result[:id]}
     Publisher.publish(msg)
-    render :json => {:pad => msg}.as_json
+
+    render json: result
+
   end
 
   def delete
