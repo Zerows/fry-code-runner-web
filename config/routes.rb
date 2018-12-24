@@ -8,11 +8,12 @@ Rails.application.routes.draw do
     post 'signup', to: 'users#create'
 
     scope 'pads', controller: 'pads' do
-      get "/", :action => 'index', :as => 'pads_dashboard'
-      post "/", :action => 'create', :as => 'create_pad'
-      get '/:pad_id', :action => 'show_pad', :as => 'show_pad'
-      put '/:pad_id', :action => 'update', :as => 'update_pad'
-      delete '/:pad_id', :action => 'delete', :as => 'delete_pad'
+      get '/', :action => 'index'
+      post '/', :action => 'create'
+      get '/:pad_id', :action => 'show'
+      put '/:pad_id', :action => 'update'
+      delete '/:pad_id', :action => 'delete'
+      put '/:pad_id/submit', :action => 'submit'
     end
 
     scope 'results', controller: 'results' do

@@ -11,7 +11,7 @@ export default Controller.extend({
         filename: filename
       });
       newRecord.save().then((record) => {
-        this.transitionToRoute('pads-show', record.get('id'))
+        this.transitionToRoute('pads.show', record.get('id'))
       });
     },
 
