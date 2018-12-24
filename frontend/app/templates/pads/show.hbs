@@ -21,7 +21,7 @@
     <div class="col-6">
       {{load-spinner show=showProgress}}
       {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-      mode=(concat "ace/mode/" model.language)
+      lines=30 mode=(concat "ace/mode/" model.language)
       value=model.content update=(action (mut model.content))}}
     </div>
     <div class="col-6 no-padding">
