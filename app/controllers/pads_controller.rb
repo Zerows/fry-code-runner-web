@@ -4,18 +4,17 @@ class PadsController < ApplicationController
 
   def index
     pads = current_user.pads.take(10)
-    render :json => {:pads => pads}.as_json
+    render :json => pads
   end
 
   def show_pad
     pad = Pad.find(params[:pad_id])
-    render :json => {:pad => pad}.as_json
+    render json: pad
   end
 
   def create
     pad = current_user.pads.create!(pads_params)
-    puts pad.to_json
-    render :json => {:pad => pad}.as_json
+    render json: pad
   end
 
   def update
