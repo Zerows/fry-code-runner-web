@@ -6,7 +6,6 @@ export default DS.RESTAdapter.extend(DataAdapterMixin, {
   host: 'http://localhost:3000/api',
   session: service(),
   authorize(xhr) {
-    console.log('auth')
     let { token } = this.get('session.data.authenticated');
     if (token !== undefined) {
       xhr.setRequestHeader('Authorization', `Bearer ${token}`);
