@@ -8,7 +8,7 @@ export default Controller.extend({
   },
   actions: {
     submitPad(pad) {
-      pad.save();
+      pad.submit();
       this.set('showLoader', true);
     },
     removeLoader() {
