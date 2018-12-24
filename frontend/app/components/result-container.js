@@ -20,7 +20,7 @@ export default Component.extend({
             this.removeLoader()
           }
         })
-      }, 500);
+      }, 3000);
 
   }
 });
