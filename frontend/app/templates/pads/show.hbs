@@ -3,7 +3,7 @@
     <div class="col-6">
       <div class="m-2 code-editor-controls">
         <input type="text" class="title" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
-        <select class="custom-select custom-select-sm col-2" disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
+        <select class="custom-select custom-select-sm col-2" disabled={{showProgress}} onchange={{action (mut model.language) value="target.value"}}>
           {{#each supportedLanguages as |rec|}}
           <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
           {{/each}}
@@ -19,9 +19,9 @@
 
   <div class="row monokai-bg p-1">
     <div class="col-6">
-      {{load-spinner show=showLoader}}
+      {{load-spinner show=showProgress}}
       {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-      lines=30 mode=(concat "ace/mode/" model.language)
+      mode=(concat "ace/mode/" model.language)
       value=model.content update=(action (mut model.content))}}
     </div>
     <div class="col-6 no-padding">

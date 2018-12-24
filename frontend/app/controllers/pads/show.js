@@ -3,7 +3,6 @@ import { computed } from '@ember/object'
 import { later } from '@ember/runloop';
 
 export default Controller.extend({
-  showLoader: false,
   init() {
     this._super(...arguments)
     this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
@@ -35,10 +34,6 @@ export default Controller.extend({
         this.set('result', result);
         this.poll();
       });
-      this.set('showLoader', true);
-    },
-    removeLoader() {
-      this.set('showLoader', false);
     }
   }
 });
