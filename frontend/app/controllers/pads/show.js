@@ -11,8 +11,7 @@ export default Controller.extend({
   showProgress: computed('result', function() {
     let result = this.get('result');
     let status = result != null ? result.get('status') : "";
-    if(status.length == 0
-      || status == 'in_queue'
+    if(status == 'in_queue'
       || status == 'in_progress'){
         return true;
       }else{
