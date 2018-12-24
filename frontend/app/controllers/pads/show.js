@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object'
+import { later } from '@ember/runloop';
 
 export default Controller.extend({
   showLoader: false,
@@ -18,10 +19,22 @@ export default Controller.extend({
         return false;
       }
   }),
+  poll(){
+    let result = this.get('result');
+    later(() => {
+      result.reload().then((model) => {
+        this.notifyPropertyChange('result');
+        if (model.status == 'in_queue' || model.status == 'in_progress') {
+          this.poll();
+        }
+      })
+    }, 3000);
+  },
   actions: {
     submitPad(pad) {
       pad.submit().then((result) => {
         this.set('result', result);
+        this.poll();
       });
       this.set('showLoader', true);
     },
