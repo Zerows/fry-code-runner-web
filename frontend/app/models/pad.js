@@ -4,5 +4,9 @@ export default DS.Model.extend({
   content: DS.attr('string'),
   language: DS.attr('string'),
   filename: DS.attr('string'),
-  result_id: DS.attr(),
+
+  submit(){
+    const adapter = this.store.adapterFor(this.constructor.modelName);
+    return adapter.submit(this);
+  }
 });
