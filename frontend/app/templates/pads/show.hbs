@@ -12,7 +12,7 @@
     </div>
     <div class="col-6">
       <div class="result m-2">
-        <h3 class="title">Output Console:</h3>
+        <h3 class="title">Output Console: {{showProgress}}</h3>
       </div>
     </div>
   </div>
@@ -26,10 +26,7 @@
     </div>
     <div class="col-6 no-padding">
       <div>
-        {{#result-container class='code-output' resultId=model.result_id padId=model.id removeLoader=(action
-        'removeLoader')}}
-
-        {{/result-container}}
+        {{#result-container class='code-output' result=result removeLoader=(action 'removeLoader')}}{{/result-container}}
       </div>
     </div>
   </div>
