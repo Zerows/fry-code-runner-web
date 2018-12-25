@@ -34,7 +34,7 @@ export default Base.extend({
           });
         });
       }, function (xhr, status, error) {
-        let response = xhr.responseText;
+        let response = xhr.responseJSON;
         run(function () {
           reject(response);
         });
