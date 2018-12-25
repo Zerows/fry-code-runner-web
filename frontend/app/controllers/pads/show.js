@@ -54,7 +54,9 @@ export default Controller.extend({
       return "Submitting"
     } else if (status == 'in_progress') {
       return "In Progress"
-    } else {
+    } else if(status == 'cancelled'){
+      return "Retry";
+    }else {
       return "Run";
     }
   }),
