@@ -7,17 +7,17 @@ export default Controller.extend({
     this._super(...arguments)
     this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
   },
-  showProgress: computed('result', function() {
+  showProgress: computed('result', function () {
     let result = this.get('result');
     let status = result != null ? result.get('status') : "";
-    if(status == 'in_queue'
-      || status == 'in_progress'){
-        return true;
-      }else{
-        return false;
-      }
+    if (status == 'in_queue'
+      || status == 'in_progress') {
+      return true;
+    } else {
+      return false;
+    }
   }),
-  poll(){
+  poll() {
     let result = this.get('result');
     later(() => {
       result.reload().then((model) => {
@@ -26,10 +26,22 @@ export default Controller.extend({
           this.poll();
         }
       })
-    }, 3000);
+    }, 1000);
   },
+  submitText: computed('result', function () {
+    let result = this.get('result');
+    let status = result != null ? result.get('status') : "";
+    if (status == 'in_queue') {
+      return "Submitting"
+    } else if (status == 'in_progress') {
+      return "In Progress"
+    } else {
+      return "Submit";
+    }
+  }),
   actions: {
     submitPad(pad) {
+      console.log('submitting');
       pad.submit().then((result) => {
         this.set('result', result);
         this.poll();

@@ -3,7 +3,7 @@
     <div class="col-6">
       <div class="row">
         <div class="col-9">
-          <input type="text" class="title form-control" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
+          <input type="text" class="title form-control px-1" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
         </div>
         <div class="col-3">
           <select class="custom-select custom-select-sm" disabled={{showProgress}} onchange={{action (mut model.language) value="target.value"}}>
@@ -16,7 +16,7 @@
     </div>
     <div class="col-6">
       <div class="result m-2">
-        <h3 class="title">Output Console: {{showProgress}}</h3>
+        <span class="title p-1">Output</span>
       </div>
     </div>
   </div>
@@ -35,8 +35,8 @@
     </div>
   </div>
   <div class="m-3 text-center">
-    {{#bs-button type="success btn-lg" onClick=(action "submitPad" model)}}
-    Submit
-    {{/bs-button}}
+    <button class="btn btn-lg btn-success" onClick={{action "submitPad" model}} disabled={{showProgress}}>
+      {{submitText}}
+    </button>
   </div>
 </div>
