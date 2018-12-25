@@ -11,7 +11,7 @@ export default Component.extend({
             );
         });
     },
-    didDestroyElement() {
+    willDestroyElement() {
         this.$().backstretch("destroy", true);
     }
 });
