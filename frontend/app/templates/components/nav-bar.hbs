@@ -11,9 +11,9 @@
     {{/navbar.nav}}
   {{/navbar.content}}
   {{#if session.isAuthenticated}}
-    {{#bs-button type="primary" onClick=(action "logout")}}{{fa-icon 'sign-in'}} Logout{{/bs-button}}
+    {{#bs-button type="primary" onClick=(action "logout")}}{{fa-icon 'sign-out'}} Logout{{/bs-button}}
   {{else}}
-    {{#link-to "login" class='btn btn-primary'}}{{fa-icon 'sign-out'}} Login{{/link-to}}
+    {{#link-to "login" class='btn btn-primary'}}{{fa-icon 'sign-in'}} Login{{/link-to}}
   {{/if}}
 {{/bs-navbar}}
 
