@@ -62,7 +62,14 @@ export default Controller.extend({
   }),
   actions: {
     submitPad(pad) {
+      //A temp record to show the status immesiately
+      let tempResult = this.store.createRecord('result', {
+        status: 'in_queue'
+      });
+      this.set('result', tempResult);
       pad.submit().then((result) => {
+        //make sure we unload the temp record
+        tempResult.unloadRecord();
         this.set('result', result);
         this.poll();
       });
