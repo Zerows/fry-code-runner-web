@@ -22,13 +22,19 @@ export default Controller.extend({
     return finalVal;
   }),
   saving: false,
-  poll() {
+  maxPoll: 10,
+  poll(current = 0) {
     let result = this.get('result');
     later(() => {
       result.reload().then((model) => {
         this.notifyPropertyChange('result');
-        if (model.status == 'in_queue' || model.status == 'in_progress') {
-          this.poll();
+        let canPoll = model.status == 'in_queue' || model.status == 'in_progress';
+        canPoll = canPoll && current <= this.get('maxPoll');
+        if (canPoll) {
+          this.poll(++current);
+        }
+        if(current >= this.get('maxPoll')){
+          model.set('status', 'cancelled');
         }
       })
     }, 1000);
