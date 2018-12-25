@@ -4,7 +4,11 @@ class PadsController < ApplicationController
 
   def index
     pads = current_user.pads.take(10)
-    render :json => pads
+    if pads.empty?
+      render json: { pads: [] }
+    else
+      render json: pads
+    end
   end
 
   def show
