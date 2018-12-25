@@ -38,3 +38,16 @@
     color: $light;
   }
 }
+#landing-backstretch{
+  background: $dark;
+}
+.landing{
+  .title{
+    color: $light;
+    font-size: 4em;
+  }
+  .description{
+    color: $light;
+    font-size: 1.4em;
+  }
+}
