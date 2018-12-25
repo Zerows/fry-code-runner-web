@@ -5,7 +5,7 @@ import $ from 'jquery'
 import {run} from '@ember/runloop'
 
 export default Base.extend({
-  tokenEndpoint: 'http://localhost:3000/api/auth/login',
+  tokenEndpoint: window.location.origin + '/api/auth/login',
   restore: function (data) {
     return new Promise(function (resolve, reject) {
       if (!isEmpty(data.token)) {
