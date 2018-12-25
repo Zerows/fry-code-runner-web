@@ -13,13 +13,19 @@ class PadsController < ApplicationController
   end
 
   def create
-    pad = current_user.pads.create!(pads_params)
+    pad = current_user.pads.create!(create_pads_params)
+    render json: pad
+  end
+
+  def update
+    pad = Pad.find(params[:pad_id])
+    pad.update(update_pads_params)
     render json: pad
   end
 
   def submit
     pad = Pad.find(params[:pad_id])
-    pad.update(pads_params)
+    pad.update(update_pads_params)
 
     result = Result.new
     result.pad = pad
@@ -37,7 +43,11 @@ class PadsController < ApplicationController
     head :no_content
   end
 
-  def pads_params
+  def create_pads_params
+    params.require(:pad).permit(:content, :language).merge(filename: Faker::Book.title)
+  end
+
+  def update_pads_params
     params.require(:pad).permit(:content, :language, :filename)
   end
 end

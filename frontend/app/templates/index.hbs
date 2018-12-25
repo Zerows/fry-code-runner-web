@@ -1,4 +1,27 @@
 {{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-{{outlet}}
+{{#back-stretch images=images id='landing-backstretch'}}
+<div class="landing p-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="title pt-5 pb-1 col-md-6 col-sm-12 justify-content-center">
+                We make Fries
+            </div>
+            <div class="description col-md-8 col-sm-10">
+                Give us your code, we fry them and make it deliciuos.
+            </div>
+        </div>
+        <div class="row justify-content-center pt-5">
+            {{#link-to 'login' class="btn btn-lg btn-primary mt-5 mb-2"}} 
+                Create a Pad
+            {{/link-to}}
+        </div>
+    </div>
+</div>
+{{/back-stretch}}
+<div class="landing mt-5">
+    <div class="container mt-5">
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </div>
+    </div>
+</div>
