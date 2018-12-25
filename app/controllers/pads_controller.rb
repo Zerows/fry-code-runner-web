@@ -38,6 +38,6 @@ class PadsController < ApplicationController
   end
 
   def pads_params
-    params.require(:pad).permit(:content, :language, :filename)
+    params.require(:pad).permit(:content, :language).merge(filename: Faker::Book.title)
   end
 end
