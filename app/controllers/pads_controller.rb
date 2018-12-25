@@ -17,6 +17,12 @@ class PadsController < ApplicationController
     render json: pad
   end
 
+  def update
+    pad = Pad.find(params[:pad_id])
+    pad.update(pads_params)
+    render json: pad
+  end
+
   def submit
     pad = Pad.find(params[:pad_id])
     pad.update(pads_params)
