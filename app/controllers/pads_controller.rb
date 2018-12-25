@@ -48,7 +48,10 @@ class PadsController < ApplicationController
   end
 
   def create_pads_params
-    params.require(:pad).permit(:content, :language).merge(filename: Faker::Book.title)
+    title = Faker::Book.title
+    params.require(:pad).permit(:content, :language)
+        .merge(filename: title)
+        .merge(content: "//#{title}")
   end
 
   def update_pads_params
