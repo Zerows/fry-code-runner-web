@@ -7,11 +7,16 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('pads', { path: '/pads' });
-  this.route('questions', { path: '/questions' });
-  this.route('pads-show', { path: '/pads/:pad_id' });
-  this.route('questions-show', { path: '/questions/:question_id' });
+  this.route('index', { path: '/' });
   this.route('login');
+  this.route('pads', function(){
+    this.route('index', { path: '/' });
+    this.route('show', { path: '/:pad_id' });
+  });
+  this.route('questions', function(){
+    this.route('index', { path: '/' });
+    this.route('show', { path: '/:question_id' });
+  });
 });
 
 export default Router;

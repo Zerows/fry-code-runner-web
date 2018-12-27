@@ -4,18 +4,17 @@
     {{#link-to "index" class="navbar-brand"}}Code Fry{{/link-to}}
   </div>
   {{#navbar.content}}
-    {{#if session.isAuthenticated}}
-      {{#navbar.nav as |nav|}}
-        {{#nav.item}}{{#nav.link-to "pads"}}Pads{{/nav.link-to}}{{/nav.item}}
+    {{#navbar.nav   as |nav|}}
+      {{#if session.isAuthenticated}}
+        {{#nav.item}}{{#nav.link-to "pads.index"}}Pads{{/nav.link-to}}{{/nav.item}}
         {{#nav.item}}{{#nav.link-to "questions"}}Questions{{/nav.link-to}}{{/nav.item}}
-      {{/navbar.nav}}
-      {{#navbar.nav class="ml-auto" as |nav|}}
-        {{#nav.item class="nav-link" onClick=(action "logout")}}Logout{{/nav.item}}
-      {{/navbar.nav}}
-    {{else}}
-      {{#navbar.nav class="ml-auto" as |nav|}}
-        {{#nav.item}}{{#nav.link-to "login"}}Login{{/nav.link-to}}{{/nav.item}}
-      {{/navbar.nav}}
-    {{/if}}
+      {{/if}}
+    {{/navbar.nav}}
   {{/navbar.content}}
+  {{#if session.isAuthenticated}}
+    {{#bs-button type="primary" onClick=(action "logout")}}{{fa-icon 'sign-out'}} Logout{{/bs-button}}
+  {{else}}
+    {{#link-to "login" class='btn btn-primary'}}{{fa-icon 'sign-in'}} Login{{/link-to}}
+  {{/if}}
 {{/bs-navbar}}
+

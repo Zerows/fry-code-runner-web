@@ -1,0 +1,63 @@
+@import "custom_theme";
+@import "ember-bootstrap/bootstrap";
+@import "loader";
+@import "font-awesome";
+@import "variables";
+
+.code-editor {
+  width: 100%;
+  border-right: 2px gray solid;
+  border-bottom: 2px gray solid;
+}
+.code-editor-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pad-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.monokai-bg{
+  background:$monokai-bg;
+}
+
+.pad-content{
+  .title{
+    @extend .bg-dark;
+    color: $light;
+    border: none;
+    border-radius: 0px;
+    border-bottom: gray 1px solid;
+    &:focus{
+      border: none;
+      border-radius: 0px;
+      border-bottom: $primary 1px solid;
+      box-shadow: none;
+    }
+  }
+}
+.result{
+  .title{
+    color: $light;
+    border: none;
+    font-size: 1.2rem;
+  }
+  .output {
+    color: $light;
+  }
+}
+#landing-backstretch{
+  background: $dark;
+}
+.landing{
+  .title{
+    color: $light;
+    font-size: 4em;
+  }
+  .description{
+    color: $light;
+    font-size: 1.4em;
+  }
+}
