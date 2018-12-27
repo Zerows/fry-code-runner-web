@@ -11,7 +11,7 @@ export default Controller.extend({
         title: title
       });
       newRecord.save().then((record) => {
-        this.transitionToRoute('questions-show', record.get('id'))
+        this.transitionToRoute('questions.show', record.get('id'))
       });
     },
 
