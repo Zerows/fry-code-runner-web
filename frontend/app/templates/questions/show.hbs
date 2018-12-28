@@ -1,18 +1,21 @@
 <div class='pad-content container-fluid'>
   <div class="row bg-dark border-bottom border-primary p-1 border-right border-primary justify-content-center">
     <div class="col-6">
-      <div class="row">
-        <div class="col-9">
-          <input type="text" class="title form-control px-1" value={{model.title}} onchange={{action (mut model.title) value="target.value"}}>
-        </div>
-        <div class="col-3">
-          <select class="custom-select custom-select-sm" disabled={{showProgress}} onchange={{action (mut model.language) value="target.value"}}>
-            {{#each supportedLanguages as |rec|}}
-            <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
-            {{/each}}
-          </select>
-        </div>
-      </div>
+      <input type="text" class="title form-control px-1" value={{model.title}} onchange={{action (mut model.title) value="target.value"}}>
+    </div>
+    <div class="col-2">
+      <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
+        {{#each supportedLanguages as |rec|}}
+        <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="col-2">
+      <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.difficulty) value="target.value"}}>
+        {{#each difficulty as |rec|}}
+        <option selected={{eq rec model.difficulty}} value={{rec}}>{{capitalize rec}}</option>
+        {{/each}}
+      </select>
     </div>
   </div>
 

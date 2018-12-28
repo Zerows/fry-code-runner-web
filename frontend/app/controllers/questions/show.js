@@ -2,10 +2,10 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object'
 
 export default Controller.extend({
-  showLoader: false,
   init() {
     this._super(...arguments);
     this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
+    this.set('difficulty', ['easy', 'medium', 'hard'])
   },
   
   showLoader: computed('result','saving', function () {
