@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   def index
     questions = Question.take(10)
     if questions.empty?
-      render json: { questions: [] }
+      render json: {questions: []}
     else
       render json: questions
     end
@@ -17,12 +17,12 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.create!(question_params)
+    question = Question.create!(create_question_params)
     render json: question
   end
 
   def update
-    Question.find(params[:question_id]).update(question_params)
+    Question.find(params[:question_id]).update(update_question_params)
     head :no_content
   end
 
@@ -31,10 +31,14 @@ class QuestionsController < ApplicationController
     head :no_content
   end
 
-  def question_params
+  def create_question_params
     title = Faker::Book.title
     params.require(:question).permit(:content, :language)
         .merge(title: title)
         .merge(content: "//#{title}")
+  end
+
+  def update_question_params
+    params.require(:question).permit(:content, :language, :title)
   end
 end
