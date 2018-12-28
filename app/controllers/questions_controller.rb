@@ -4,18 +4,21 @@ class QuestionsController < ApplicationController
 
   def index
     questions = Question.take(10)
-    render :json => {:questions => questions}.as_json
+    if questions.empty?
+      render json: { questions: [] }
+    else
+      render json: questions
+    end
   end
 
   def show_question
     question = Question.find(params[:question_id])
-    render :json => {:question => question}.as_json
+    render json: question
   end
 
   def create
     question = Question.create!(question_params)
-    puts question.to_json
-    render :json => {:question => question}.as_json
+    render json: question
   end
 
   def update
@@ -29,6 +32,9 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :title, :language)
+    title = Faker::Book.title
+    params.require(:question).permit(:content, :language)
+        .merge(title: title)
+        .merge(content: "//#{title}")
   end
 end
