@@ -32,7 +32,7 @@ class PadsController < ApplicationController
     pad.update(update_pads_params)
 
     result = Result.new
-    result.pad = pad
+    result.runner = pad
     result.save
 
     msg = {:id => params[:pad_id], :result_id => result[:id]}
@@ -47,6 +47,7 @@ class PadsController < ApplicationController
     head :no_content
   end
 
+  private
   def create_pads_params
     title = Faker::Book.title
     params.require(:pad).permit(:content, :language)

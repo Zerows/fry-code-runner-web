@@ -8,11 +8,12 @@ export default Controller.extend({
     this.set('difficulty', ['easy', 'medium', 'hard'])
   },
   
-  showLoader: computed('result','saving', function () {
+  showLoader: computed('saving', function () {
     let finalVal = this.get('saving');
     return finalVal;
   }),
   saving: false,
+  canShowPads: false, 
   saveText: computed('saving', function (){
     let result = this.get('saving');
     if(result){
@@ -27,6 +28,9 @@ export default Controller.extend({
       question.save().then(() => {
         this.set('saving', false);
       });
+    },
+    dryRun(){
+      
     }
   }
 });

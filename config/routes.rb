@@ -17,15 +17,16 @@ Rails.application.routes.draw do
     end
 
     scope 'questions', controller: 'questions' do
-      get "/", :action => 'index', :as => 'questions_dashboard'
-      post "/", :action => 'create', :as => 'create_question'
-      get '/:question_id', :action => 'show_question', :as => 'show_question'
-      put '/:question_id', :action => 'update', :as => 'update_question'
-      delete '/:question_id', :action => 'delete', :as => 'delete_question'
+      get '/', :action => 'index'
+      post '/', :action => 'create'
+      get '/:question_id', :action => 'show'
+      put '/:question_id', :action => 'update'
+      delete '/:question_id', :action => 'delete'
+      put '/:question_id/run', :action => 'dry_run'
     end
 
     scope 'results', controller: 'results' do
-      get '/:result_id', :action => 'get_result', :as => 'get_result'
+      get '/:result_id', :action => 'show'
     end
   end
 end

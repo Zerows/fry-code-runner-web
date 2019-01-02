@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_161025) do
+ActiveRecord::Schema.define(version: 2019_01_02_143603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,12 @@ ActiveRecord::Schema.define(version: 2018_12_28_161025) do
   create_table "results", force: :cascade do |t|
     t.string "output"
     t.string "error"
-    t.bigint "pad_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.index ["pad_id"], name: "index_results_on_pad_id"
+    t.string "runner_type"
+    t.bigint "runner_id"
+    t.index ["runner_type", "runner_id"], name: "index_results_on_runner_type_and_runner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,5 +52,4 @@ ActiveRecord::Schema.define(version: 2018_12_28_161025) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "results", "pads"
 end

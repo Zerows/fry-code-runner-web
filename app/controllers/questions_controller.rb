@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show_question
+  def show
     question = Question.find(params[:question_id])
     render json: question
   end
@@ -31,6 +31,24 @@ class QuestionsController < ApplicationController
     head :no_content
   end
 
+  def dry_run
+    question = Question.find(params[:question_id])
+    question.update(update_question_params)
+
+    pad = current_user.pads.new(run_question_params)
+    pad.save
+
+    result = Result.new
+    result.pad = pad
+    result.save
+
+    msg = {:id => params[:pad_id], :result_id => result[:id]}
+    Publisher.publish(msg)
+
+
+  end
+
+  private
   def create_question_params
     title = Faker::Book.title
     params.require(:question).permit(:content, :language)
