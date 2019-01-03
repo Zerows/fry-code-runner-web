@@ -2,8 +2,13 @@
   <div class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
     <div class="col-6">
       <div class="row">
-        <div class="col-9">
+        <div class="col-7">
           <input type="text" class="title form-control px-1" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary btn-sm text-truncate"  onClick={{action "showQuestionModal" model}}  disabled={{showLoader}}>
+            Questions
+          </button>
         </div>
         <div class="col-3">
           <select class="custom-select custom-select-sm" disabled={{showProgress}} onchange={{action (mut model.language) value="target.value"}}>
@@ -53,3 +58,6 @@
     </div>
   </div>
 </div>
+{{#if showQuestions}}
+  {{questions-list-modal questions=questions onQuestionsHidden=(action "onQuestionsHidden") onSelect=(action 'onSelect')}}
+ {{/if}}

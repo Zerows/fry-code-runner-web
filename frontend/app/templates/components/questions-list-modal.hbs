@@ -1,0 +1,22 @@
+{{#bs-modal onHidden=onQuestionsHidden as |modal|}}
+    {{#modal.header}}
+        <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Questions</h4>
+    {{/modal.header}}
+    {{#modal.body}}
+    <ul class="list-group list-group-flush p-0">
+        {{#each questions as |question|}}
+        <li {{action "onSelect" question on="click"}} class="question-list list-group-item d-flex justify-content-between align-items-center pointer">
+        <span>
+            {{question.title}} 
+            <span class="badge badge-primary badge-pill">{{capitalize question.difficulty}}</span>
+        </span>
+        <div>
+            {{capitalize question.language}}
+        </div>
+        </li>
+        {{else}}
+        Loading...
+        {{/each}}
+    </ul>
+    {{/modal.body}}
+{{/bs-modal}}

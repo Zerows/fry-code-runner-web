@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object'
-import { later } from '@ember/runloop';
 import CodeRunner from '../../mixins/code-runner'
 
 export default Controller.extend(CodeRunner, {
@@ -11,9 +10,9 @@ export default Controller.extend(CodeRunner, {
       return "Submitting"
     } else if (status == 'in_progress') {
       return "In Progress"
-    } else if(status == 'cancelled'){
+    } else if (status == 'cancelled') {
       return "Retry";
-    }else {
+    } else {
       return "Run";
     }
   }),
@@ -31,11 +30,26 @@ export default Controller.extend(CodeRunner, {
         this.poll();
       });
     },
-    save(pad){
+    save(pad) {
       this.set('saving', true);
       pad.save().then(() => {
         this.set('saving', false);
       });
+    },
+    showQuestionModal() {
+      this.send('fetchQuestions', this);
+      this.set('showQuestions', true);
+    },
+    onQuestionsHidden() {
+      this.set('showQuestions', false);
+    },
+    onSelect(question) {
+      let model = this.get('model');
+      model.setProperties({
+        'content': question.content,
+        'language': question.language
+      });
+      this.set('showQuestions', false);
     }
-  }
+  },
 });
