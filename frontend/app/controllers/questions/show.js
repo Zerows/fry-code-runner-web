@@ -8,9 +8,18 @@ export default Controller.extend({
     this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
     this.set('difficulty', ['easy', 'medium', 'hard'])
   },
-
-  showLoader: computed('saving', function () {
-    let finalVal = this.get('saving');
+  isApiInProgress: function () {
+    let result = this.get('result');
+    let status = result != null ? result.get('status') : "";
+    if (status == 'in_queue'
+      || status == 'in_progress') {
+        return true;
+    } else {
+      return false;
+    }
+  },
+  showLoader: computed('result','saving', function () {
+    let finalVal = this.isApiInProgress() || this.get('saving');
     return finalVal;
   }),
   saving: false,
