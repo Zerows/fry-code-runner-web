@@ -1,7 +1,7 @@
 version: "2"
 services:
   web:
-    image: sriram6793/code-fry-web:latest
+    build: .
     links:
       - db
       - rmq

@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
       - rmq
-    command: ["./wait.sh","rabbitmq:5672 ","--", "./server_start.sh"]
+    command: ["./wait.sh","rabbitmq:5672 ","--", "./dev_server_start.sh"]
   rmq:
     container_name: "rabbitmq"
     ports:

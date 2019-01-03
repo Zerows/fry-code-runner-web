@@ -42,6 +42,6 @@ docker-compose build (To build new images (run if you made any changes in your d
 
 ## Production Deployment
 
-1. docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d
+1. export POSTGRES_PASSWORD="example" && export SECRET_KEY_BASE="1e7c79f719c7b273c06232d5176416cb6076e7bb6e5a70eed72d49918dd27b6aaf5d8ef85b60092c28bcd7813c0fc81427b6ed9d0241d8a048cb2afc31e34151" && docker-compose -f docker-compose.yml -f docker-compose.production.yml up
 2. docker-compose build web (to build web service separately)
 3. docker-compose up --no-deps -d web (to restart web alone without affecting other dependent services)
