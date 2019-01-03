@@ -13,6 +13,7 @@
           <th scope="col">#</th>
           <th scope="col">Title</th>
           <th scope="col">Language</th>
+          <th scope="col">Difficulty</th>
           <th scope="col">{{fa-icon 'wrench'}}</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
           <td scope="col">{{index}}</td>
           <td scope="col">{{#link-to 'questions.show' rec}}{{ concat rec.title }}{{/link-to}}</td>
           <td scope="col">{{capitalize rec.language}}</td>
+          <td scope="col">{{capitalize rec.difficulty}}</td>
           <td scope="col">
             {{#bs-button outline=true type="danger" onClick=(action "deleteQuestion" rec)}}
             {{fa-icon 'trash'}}
