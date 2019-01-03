@@ -19,11 +19,16 @@
     </div>
   </div>
 
-  <div class="row monokai-bg p-1 justify-content-center">
-    <div class="col-10">
+  <div class="row monokai-bg p-1">
+    <div class="col-6 col-lg-6 col-md-6 col-sm-10 ">
       {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
       lines=30 mode=(concat "ace/mode/" model.language)
       value=model.content update=(action (mut model.content))}}
+    </div>
+    <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
+      <div>
+        {{#result-container class='code-output' result=result }}{{/result-container}}
+      </div>
     </div>
   </div>
 </div>
@@ -33,7 +38,7 @@
     <div class="col-6">
       <div class="row justify-content-end">
         <div class="col-3">
-          <button class="btn btn-primary btn-block text-truncate" onClick={{action "dryRun"}} disabled={{showLoader}}>
+          <button class="btn btn-primary btn-block text-truncate" onClick={{action "dryRun" model}} disabled={{showLoader}}>
             Dry Run
           </button>
         </div>

@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.create!(create_question_params)
+    question = helpers.create_question(create_question_params)
     render json: question
   end
 
@@ -33,25 +33,23 @@ class QuestionsController < ApplicationController
 
   def dry_run
     question = Question.find(params[:question_id])
-    question.update(update_question_params)
-    pad = nil
-    result = Result.new
-    result.pad = pad
-    result.save
-
-    msg = {:id => params[:question_id], :result_id => result[:id]}
-    Publisher.publish(msg)
-
-    render json: result
-
-
+    begin
+      result = helpers.update_question_and_submit(question, update_question_params)
+      msg = {:id => question.pad.id, :result_id => result[:id]}
+      Publisher.publish(msg)
+      render json: result
+    rescue Exception => e
+      raise(ExceptionHandler::QuestionRunError, (e.message unless e.nil?))
+    end
   end
 
   private
+
   def create_question_params
     title = Faker::Book.title
     params.require(:question).permit(:content, :language)
         .merge(title: title)
+        .merge(language: 'java')
         .merge(content: "//#{title}")
   end
 
