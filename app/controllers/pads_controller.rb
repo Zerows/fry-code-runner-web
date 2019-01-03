@@ -32,7 +32,7 @@ class PadsController < ApplicationController
     pad.update(update_pads_params)
 
     result = Result.new
-    result.runner = pad
+    result.pad = pad
     result.save
 
     msg = {:id => params[:pad_id], :result_id => result[:id]}

@@ -34,16 +34,15 @@ class QuestionsController < ApplicationController
   def dry_run
     question = Question.find(params[:question_id])
     question.update(update_question_params)
-
-    pad = current_user.pads.new(run_question_params)
-    pad.save
-
+    pad = nil
     result = Result.new
     result.pad = pad
     result.save
 
-    msg = {:id => params[:pad_id], :result_id => result[:id]}
+    msg = {:id => params[:question_id], :result_id => result[:id]}
     Publisher.publish(msg)
+
+    render json: result
 
 
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_143603) do
+ActiveRecord::Schema.define(version: 2019_01_03_100600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +39,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_143603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.string "runner_type"
-    t.bigint "runner_id"
-    t.index ["runner_type", "runner_id"], name: "index_results_on_runner_type_and_runner_id"
+    t.bigint "pad_id"
+    t.index ["pad_id"], name: "index_results_on_pad_id"
   end
 
   create_table "users", force: :cascade do |t|

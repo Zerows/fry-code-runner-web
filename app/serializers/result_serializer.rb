@@ -1,7 +1,7 @@
 class ResultSerializer < ActiveModel::Serializer
   include ActionView::Helpers::TextHelper
   attributes :id, :status, :error, :html_output
-  has_one :runner, polymorphic: true
+  belongs_to :pad
 
   def html_output
     simple_format(object.output)
