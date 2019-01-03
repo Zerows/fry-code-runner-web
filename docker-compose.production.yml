@@ -1,0 +1,27 @@
+version: "2"
+services:
+  web:
+    image: sriram6793/code-fry-web:firsttry
+    container_name: "code-fry-app"
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+      - "1234:1234"
+    links:
+      - db
+      - rmq
+    command: ["./wait.sh","rabbitmq:5672 ","--", "./server_start.sh"]
+  rmq:
+    restart: always
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"
+  db:
+    container_name: "postgres"
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: example
