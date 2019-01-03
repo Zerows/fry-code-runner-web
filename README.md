@@ -38,3 +38,10 @@ docker-compose build (To build new images (run if you made any changes in your d
 > Add remote sdk for ruby (Rubymine -> Preferences -> SDK & Gems -> Language & Frameworks)
 
 > Edit Config -> Add Remote ruby config -> ![Run Config Image](readme/images/remote_debug_config.png)
+
+
+## Production Deployment
+
+1. docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d
+2. docker-compose build web (to build web service separately)
+3. docker-compose up --no-deps -d web (to restart web alone without affecting other dependent services)
