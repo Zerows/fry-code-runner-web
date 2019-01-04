@@ -12,7 +12,7 @@ class PadsController < ApplicationController
   end
 
   def show
-    pad = Pad.find(params[:pad_id])
+    pad = Pad.friendly.find(params[:pad_id])
     render json: pad
   end
 
@@ -22,13 +22,13 @@ class PadsController < ApplicationController
   end
 
   def update
-    pad = Pad.find(params[:pad_id])
+    pad = Pad.friendly.find(params[:pad_id])
     pad.update(update_pads_params)
     render json: pad
   end
 
   def submit
-    pad = Pad.find(params[:pad_id])
+    pad = Pad.friendly.find(params[:pad_id])
     pad.update(update_pads_params)
 
     result = Result.new
@@ -43,7 +43,7 @@ class PadsController < ApplicationController
   end
 
   def delete
-    Pad.find(params[:pad_id]).destroy
+    Pad.friendly.find(params[:pad_id]).destroy
     head :no_content
   end
 

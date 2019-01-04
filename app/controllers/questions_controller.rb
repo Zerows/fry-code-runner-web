@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    question = Question.find(params[:question_id])
+    question = Question.friendly.find(params[:question_id])
     render json: question
   end
 
@@ -22,17 +22,17 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    Question.find(params[:question_id]).update(update_question_params)
+    Question.friendly.find(params[:question_id]).update(update_question_params)
     head :no_content
   end
 
   def delete
-    Question.find(params[:question_id]).destroy
+    Question.friendly.find(params[:question_id]).destroy
     head :no_content
   end
 
   def dry_run
-    question = Question.find(params[:question_id])
+    question = Question.friendly.find(params[:question_id])
     begin
       result = helpers.update_question_and_submit(question, update_question_params)
       msg = {:id => question.pad.id, :result_id => result[:id]}

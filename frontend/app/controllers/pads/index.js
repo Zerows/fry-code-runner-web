@@ -8,7 +8,7 @@ export default Controller.extend({
         language: language
       });
       newRecord.save().then((record) => {
-        this.transitionToRoute('pads.show', record)
+        this.transitionToRoute('pads.show', record.slug)
       });
     },
 

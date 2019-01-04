@@ -7,7 +7,7 @@ export default Controller.extend({
       let newRecord = this.store.createRecord('question', {
       });
       newRecord.save().then((record) => {
-        this.transitionToRoute('questions.show', record.get('id'))
+        this.transitionToRoute('questions.show', record.slug)
       });
     },
 

@@ -20,7 +20,7 @@
         {{#each model as |rec index|}}
         <tr>
           <td scope="col">{{index}}</td>
-          <td scope="col">{{#link-to 'pads.show' rec}}{{ concat rec.filename }}{{/link-to}}</td>
+          <td scope="col">{{#link-to 'pads.show' rec.slug}}{{ concat rec.filename }}{{/link-to}}</td>
           <td scope="col">{{capitalize rec.language}}</td>
           <td scope="col">
             {{#bs-button outline=true type="danger" onClick=(action "deletePad" rec)}}
