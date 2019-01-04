@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181212141337) do
+ActiveRecord::Schema.define(version: 2019_01_03_101705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,24 @@ ActiveRecord::Schema.define(version: 20181212141337) do
     t.bigint "user_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "language"
+    t.integer "difficulty", default: 0
+    t.bigint "pad_id"
+    t.index ["pad_id"], name: "index_questions_on_pad_id"
+  end
+
   create_table "results", force: :cascade do |t|
     t.string "output"
     t.string "error"
-    t.bigint "pad_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.bigint "pad_id"
     t.index ["pad_id"], name: "index_results_on_pad_id"
   end
 
@@ -42,5 +53,4 @@ ActiveRecord::Schema.define(version: 20181212141337) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "results", "pads"
 end

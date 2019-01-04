@@ -16,8 +16,17 @@ Rails.application.routes.draw do
       put '/:pad_id/submit', :action => 'submit'
     end
 
+    scope 'questions', controller: 'questions' do
+      get '/', :action => 'index'
+      post '/', :action => 'create'
+      get '/:question_id', :action => 'show'
+      put '/:question_id', :action => 'update'
+      delete '/:question_id', :action => 'delete'
+      put '/:question_id/run', :action => 'dry_run'
+    end
+
     scope 'results', controller: 'results' do
-      get '/:result_id', :action => 'get_result', :as => 'get_result'
+      get '/:result_id', :action => 'show'
     end
   end
 end

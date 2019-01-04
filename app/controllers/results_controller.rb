@@ -1,5 +1,5 @@
 class ResultsController < ApplicationController
-  def get_result
+  def show
     result = Result.find(params[:result_id])
     render json: result
   end

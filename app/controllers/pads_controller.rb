@@ -47,6 +47,7 @@ class PadsController < ApplicationController
     head :no_content
   end
 
+  private
   def create_pads_params
     title = Faker::Book.title
     params.require(:pad).permit(:content, :language)

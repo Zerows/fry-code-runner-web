@@ -1,52 +1,8 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object'
-import { later } from '@ember/runloop';
+import CodeRunner from '../../mixins/code-runner'
 
-export default Controller.extend({
-  init() {
-    this._super(...arguments)
-    this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
-  },
-  isApiInProgress: function () {
-    let result = this.get('result');
-    let status = result != null ? result.get('status') : "";
-    if (status == 'in_queue'
-      || status == 'in_progress') {
-        return true;
-    } else {
-      return false;
-    }
-  },
-  showLoader: computed('result','saving', function () {
-    let finalVal = this.isApiInProgress() || this.get('saving');
-    return finalVal;
-  }),
-  saving: false,
-  maxPoll: 10,
-  poll(current = 0) {
-    let result = this.get('result');
-    later(() => {
-      result.reload().then((model) => {
-        this.notifyPropertyChange('result');
-        let canPoll = model.status == 'in_queue' || model.status == 'in_progress';
-        canPoll = canPoll && current <= this.get('maxPoll');
-        if (canPoll) {
-          this.poll(++current);
-        }
-        if(current >= this.get('maxPoll')){
-          model.set('status', 'cancelled');
-        }
-      })
-    }, 1000);
-  },
-  saveText: computed('saving', function (){
-    let result = this.get('saving');
-    if(result){
-      return 'Saving'
-    }else{
-      return 'Save'
-    }
-  }),
+export default Controller.extend(CodeRunner, {
   submitText: computed('result', function () {
     let result = this.get('result');
     let status = result != null ? result.get('status') : "";
@@ -54,9 +10,9 @@ export default Controller.extend({
       return "Submitting"
     } else if (status == 'in_progress') {
       return "In Progress"
-    } else if(status == 'cancelled'){
+    } else if (status == 'cancelled') {
       return "Retry";
-    }else {
+    } else {
       return "Run";
     }
   }),
@@ -74,11 +30,26 @@ export default Controller.extend({
         this.poll();
       });
     },
-    save(pad){
+    save(pad) {
       this.set('saving', true);
       pad.save().then(() => {
         this.set('saving', false);
       });
+    },
+    showQuestionModal() {
+      this.send('fetchQuestions', this);
+      this.set('showQuestions', true);
+    },
+    onQuestionsHidden() {
+      this.set('showQuestions', false);
+    },
+    onSelect(question) {
+      let model = this.get('model');
+      model.setProperties({
+        'content': question.content,
+        'language': question.language
+      });
+      this.set('showQuestions', false);
     }
-  }
+  },
 });

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="m-3">
+      {{#bs-button class='pull-right' type="success" onClick=(action "createQuestion")}}
+      Create Question
+      {{/bs-button}}
+    </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Language</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">{{fa-icon 'wrench'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rec index|}}
+        <tr>
+          <td scope="col">{{index}}</td>
+          <td scope="col">{{#link-to 'questions.show' rec}}{{ concat rec.title }}{{/link-to}}</td>
+          <td scope="col">{{capitalize rec.language}}</td>
+          <td scope="col">{{capitalize rec.difficulty}}</td>
+          <td scope="col">
+            {{#bs-button outline=true type="danger" onClick=(action "deleteQuestion" rec)}}
+            {{fa-icon 'trash'}}
+            {{/bs-button}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

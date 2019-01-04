@@ -26,7 +26,7 @@ docker-compose build (To build new images (run if you made any changes in your d
 1. docker exec -it code-fry-app bash (To log into code-fry-app container)
 2. rake db:create
 3. rake db:migrate
-4. bundle exec rspec (to execute rspec tests) 
+4. bundle exec rspec (to execute rspec tests)
 5. rake rmq:publish (to publish messages to queue)
 
 ## Debug
@@ -35,4 +35,13 @@ docker-compose build (To build new images (run if you made any changes in your d
 
 > Expose   - "1234:1234" for web on docker compose.
 
+> Add remote sdk for ruby (Rubymine -> Preferences -> SDK & Gems -> Language & Frameworks)
+
 > Edit Config -> Add Remote ruby config -> ![Run Config Image](readme/images/remote_debug_config.png)
+
+
+## Production Deployment
+
+1. export POSTGRES_PASSWORD="example" && export SECRET_KEY_BASE="1e7c79f719c7b273c06232d5176416cb6076e7bb6e5a70eed72d49918dd27b6aaf5d8ef85b60092c28bcd7813c0fc81427b6ed9d0241d8a048cb2afc31e34151" && docker-compose -f docker-compose.yml -f docker-compose.production.yml up
+2. docker-compose build web (to build web service separately)
+3. docker-compose up --no-deps -d web (to restart web alone without affecting other dependent services)

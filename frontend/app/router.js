@@ -13,6 +13,10 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('show', { path: '/:pad_id' });
   });
+  this.route('questions', function(){
+    this.route('index', { path: '/' });
+    this.route('show', { path: '/:question_id' });
+  });
 });
 
 export default Router;

@@ -61,3 +61,13 @@
     font-size: 1.4em;
   }
 }
+
+.pointer{
+  cursor: pointer;
+}
+
+.question-list{
+  &:hover{
+    background-color: $light;
+  }
+}
