@@ -21,7 +21,7 @@
         {{#each model as |rec index|}}
         <tr>
           <td scope="col">{{index}}</td>
-          <td scope="col">{{#link-to 'questions.show' rec}}{{ concat rec.title }}{{/link-to}}</td>
+          <td scope="col">{{#link-to 'questions.show' rec.slug}}{{ concat rec.title }}{{/link-to}}</td>
           <td scope="col">{{capitalize rec.language}}</td>
           <td scope="col">{{capitalize rec.difficulty}}</td>
           <td scope="col">
