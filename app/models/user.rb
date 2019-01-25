@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   # encrypt password
   has_secure_password
 
@@ -6,4 +7,5 @@ class User < ApplicationRecord
   has_many :pads, foreign_key: :user_id
   # Validations
   validates_presence_of :name, :email, :password_digest
+
 end
