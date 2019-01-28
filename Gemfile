@@ -52,7 +52,7 @@ group :development do
   gem 'rspec-rails', '~> 3.5'
   gem 'ruby-debug-ide', '~> 0.6.0'
   gem 'debase'
-  gem "rails-erd"
+  #gem "rails-erd"
 end
 
 group :test do

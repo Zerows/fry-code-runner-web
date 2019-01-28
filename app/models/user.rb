@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   rolify
   # encrypt password
-  has_secure_password
+  has_secure_password(validations: false)
 
   # Model associations
-  has_many :pads, foreign_key: :user_id
+  has_many :collaborators
+  has_many :pads, through: :collaborators
   # Validations
-  validates_presence_of :name, :email, :password_digest
-
+  validates_presence_of :name
 end
