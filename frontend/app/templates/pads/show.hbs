@@ -44,11 +44,13 @@
   <div class="row">
     <div class="col-6">
       <div class="row justify-content-end">
+        {{#if session.isAuthenticated}}
         <div class="col-3">
           <button class="btn btn-primary btn-block text-truncate"  onClick={{action "save" model}}  disabled={{showLoader}}>
             {{saveText}}
           </button>
         </div>
+        {{/if}}
         <div class="col-3">
           <button class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}} disabled={{showLoader}}>
             {{submitText}}
