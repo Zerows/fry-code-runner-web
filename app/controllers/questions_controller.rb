@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   before_action :authorize_request
+  before_action :confirm_role
 
   def index
     questions = Question.take(10)
@@ -56,4 +57,9 @@ class QuestionsController < ApplicationController
   def update_question_params
     params.require(:question).permit(:content, :language, :title, :difficulty)
   end
+
+  def confirm_role
+    can? :manage, Question
+  end
+
 end
