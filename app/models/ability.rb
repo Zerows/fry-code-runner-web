@@ -13,6 +13,7 @@ class Ability
 
     if user.has_role? :member
       can :manage, Question
+      can :manage, Pad
     end
     #
     # The first argument to `can` is the action you are giving the user

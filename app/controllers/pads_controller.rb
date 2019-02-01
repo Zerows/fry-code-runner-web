@@ -35,7 +35,7 @@ class PadsController < ApplicationController
     result.pad = pad
     result.save
 
-    msg = {:id => params[:pad_id], :result_id => result[:id]}
+    msg = {:id => pad.id, :result_id => result[:id]}
     Publisher.publish(msg)
 
     render json: result
