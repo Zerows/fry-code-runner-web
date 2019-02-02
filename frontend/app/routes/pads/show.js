@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
+import GuestAuthenticatedRouteMixinMixin from 'frontend/mixins/guest-authenticated-route-mixin';
 
-export default Route.extend({
+export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   model(params) {
     return this.store.findRecord('pad', params.pad_id);
   },
