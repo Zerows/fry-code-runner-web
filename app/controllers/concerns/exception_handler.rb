@@ -6,6 +6,7 @@ module ExceptionHandler
   class MissingToken < StandardError; end
   class InvalidToken < StandardError; end
   class QuestionRunError < StandardError; end
+  class Forbidden < StandardError; end
 
   included do
     # Define custom handlers
@@ -14,6 +15,7 @@ module ExceptionHandler
     rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
     rescue_from ExceptionHandler::QuestionRunError, with: :five_hundred
+    rescue_from ExceptionHandler::Forbidden, with: :four_hundred_three
 
     rescue_from ActiveRecord::RecordNotFound do |error|
       json_response({ message: error }, :not_found)
@@ -21,6 +23,11 @@ module ExceptionHandler
   end
 
   private
+
+  # JSON response with message; Status code 403 - unprocessable entity
+  def four_hundred_three(error)
+    json_response({ message: error }, :forbidden)
+  end
 
   # JSON response with message; Status code 422 - unprocessable entity
   def four_twenty_two(error)
