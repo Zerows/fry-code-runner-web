@@ -42,6 +42,9 @@ export default Controller.extend(CodeRunner, {
         this.set('saving', false);
       });
     },
+    onUpdate(event, val){
+      this.get('model').set('content',val);
+    },
     showQuestionModal() {
       this.send('fetchQuestions', this);
       this.set('showQuestions', true);
