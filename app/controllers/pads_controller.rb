@@ -1,6 +1,6 @@
 class PadsController < ApplicationController
 
-  before_action :authorize_request, except: [:show, :submit]
+  before_action :auth_as_member, except: [:show]
 
   def index
     pads = current_user.pads.take(10)

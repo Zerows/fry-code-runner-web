@@ -17,6 +17,10 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('show', { path: '/:question_id' });
   });
+
+  this.route('guest', function() {
+    this.route('signup');
+  });
 });
 
 export default Router;

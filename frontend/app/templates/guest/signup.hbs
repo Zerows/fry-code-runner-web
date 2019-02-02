@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row justify-content-center mt-5 pt-3 pb-2">
-    <h3 class="card-title">Login</h3>
+    <h3 class="card-title">Guest Signup</h3>
 
   </div>
   <div class="row justify-content-center">
-    {{#bs-form model=this class="col-sm-8 col-md-8 col-lg-6 card p-5" onSubmit=(action "login") as |form|}}
+    {{#bs-form model=this class="col-sm-8 col-md-8 col-lg-6 card p-5" onSubmit=(action "signup") as |form|}}
 
     {{#if error}}
     <div class="alert alert-danger">
@@ -13,22 +13,13 @@
     {{/if}}
 
     {{form.element
-    controlType="email"
-    label="Email"
-    placeholder="Email"
-    property="email"
+    controlType="name"
+    label="Name"
+    placeholder="Name"
+    property="name"
     required=true
     }}
 
-    {{form.element
-    controlType="password"
-    label="Password"
-    placeholder="Password"
-    property="password"
-    required=true
-    helpText="Minimum 6 characters"
-    }}
-    
     {{#if logging}}
     <div class="mb-3 text-center">
       {{load-spinner size=5 show=logging}}
@@ -36,7 +27,7 @@
     {{/if}}
   
     {{bs-button
-    defaultText="Login"
+    defaultText="Sign in as Guest"
     type="primary"
     disabled=logging
     buttonType="submit"

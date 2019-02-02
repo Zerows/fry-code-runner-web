@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 
-  before_action :authorize_request
+  before_action :auth_as_member
   before_action :confirm_role
 
   def index
