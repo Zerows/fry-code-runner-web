@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   scope 'api' do
     post 'auth/login', to: 'authentication#authenticate'
     post 'signup', to: 'users#create'
+    post 'guest', to: 'users#guest'
 
     scope 'pads', controller: 'pads' do
       get '/', :action => 'index'
