@@ -9,7 +9,9 @@ class ApplicationController < ActionController::API
   # Check for valid request token and return user
   def auth_as_member
     @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
-    raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials) unless @current_user.has_role? :memeber
+    unless @current_user.has_role? :member
+      raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
+    end
   end
 
   def auth_as_guest
