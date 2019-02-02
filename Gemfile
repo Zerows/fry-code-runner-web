@@ -28,6 +28,8 @@ gem 'pg'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'friendly_id', '~> 5.2.4'
+gem "rolify"
+gem 'cancancan', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -50,6 +52,7 @@ group :development do
   gem 'rspec-rails', '~> 3.5'
   gem 'ruby-debug-ide', '~> 0.6.0'
   gem 'debase'
+  #gem "rails-erd"
 end
 
 group :test do

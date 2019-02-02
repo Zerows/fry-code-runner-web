@@ -1,8 +1,10 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object'
 import CodeRunner from '../../mixins/code-runner'
+import { inject as service } from '@ember/service';
 
 export default Controller.extend(CodeRunner, {
+  session: service(),
   submitText: computed('result', function () {
     let result = this.get('result');
     let status = result != null ? result.get('status') : "";
@@ -28,11 +30,15 @@ export default Controller.extend(CodeRunner, {
         tempResult.unloadRecord();
         this.set('result', result);
         this.poll();
+      }, (err) => {
+        console.log(err);
       });
     },
     save(pad) {
       this.set('saving', true);
       pad.save().then(() => {
+        this.set('saving', false);
+      },(err) => {
         this.set('saving', false);
       });
     },

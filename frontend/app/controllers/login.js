@@ -6,9 +6,7 @@ export default Controller.extend({
   session: service(),
   actions: {
     authenticate(credentials) {
-      this.get('session').authenticate('authenticator:custom', credentials).then(() => {
-        this.transitionToRoute("pads");
-      }).catch((message) => {
+      this.get('session').authenticate('authenticator:custom', credentials).catch((message) => {
         this.set('error', message);
       });
     }
