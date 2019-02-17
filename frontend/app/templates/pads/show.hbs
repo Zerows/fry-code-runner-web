@@ -33,6 +33,7 @@
     <div class="col-6 col-lg-6 col-md-6 col-sm-10">
       {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
       lines=30 mode=(concat "ace/mode/" model.language)
+      ready=(action 'onEditorReady')
       value=model.content update=(action 'onUpdate')}}
     </div>
     <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">

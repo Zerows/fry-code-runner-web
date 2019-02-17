@@ -1,10 +1,36 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object'
+import {computed} from '@ember/object'
 import CodeRunner from '../../mixins/code-runner'
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
+import {run} from '@ember/runloop'
 
 export default Controller.extend(CodeRunner, {
   session: service(),
+  websockets: service('socket-io'),
+  socket: null,
+  canPublish: true,
+  init() {
+    this._super(...arguments);
+    const socket = this.websockets.socketFor('ws://192.168.1.226:4000');
+    this.set('socket', socket);
+    socket.on('connect', () => {
+      console.log('connect');
+    });
+    socket.on('event', (message) => {
+      console.log(message);
+      var deltas = [];
+      deltas[0] = message;
+      run(() => {
+        this.set('canPublish', false);
+        this.get('editor').getSession().getDocument().applyDeltas(deltas);
+        this.set('canPublish', true);
+      });
+    });
+    socket.on('close', () => {
+      console.log('close');
+    });
+
+  },
   submitText: computed('result', function () {
     let result = this.get('result');
     let status = result != null ? result.get('status') : "";
@@ -38,12 +64,20 @@ export default Controller.extend(CodeRunner, {
       this.set('saving', true);
       pad.save().then(() => {
         this.set('saving', false);
-      },(err) => {
+      }, (err) => {
         this.set('saving', false);
       });
     },
-    onUpdate(event, val){
-      this.get('model').set('content',val);
+    onEditorReady(editor) {
+      this.set('editor', editor);
+    },
+    onUpdate(event, val) {
+      this.get('model').set('content', val);
+      run(() => {
+        if (this.get('canPublish')) {
+          this.get('socket').emit('event', event);
+        }
+      });
     },
     showQuestionModal() {
       this.send('fetchQuestions', this);
