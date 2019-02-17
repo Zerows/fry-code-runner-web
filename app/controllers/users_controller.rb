@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
 
-  before_action :auth_as_member
-  skip_before_action :auth_as_member, only: [:create, :guest], raise: false
-
   def create
     user = User.create!(user_params)
     auth_token = AuthenticateUser.new(user.email, user.password).call

@@ -1,6 +1,12 @@
 class PadsController < ApplicationController
 
-  before_action :auth_as_member, except: [:show]
+  before_action  only: [:create, :index, :delete] do
+    auth_as(:member)
+  end
+
+  before_action only: [:update, :show, :submit] do
+    auth_as(:guest)
+  end
 
   def index
     pads = current_user.pads.take(10)
