@@ -1,5 +1,7 @@
 class AuthenticationController < ApplicationController
-  skip_before_action :auth_as_member, only: :authenticate, raise: false
+  skip_before_action only: :authenticate, raise: false do
+    auth_as(:member)
+  end
 
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call

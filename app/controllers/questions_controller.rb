@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
 
-  before_action :auth_as_member
-  before_action :confirm_role
+  before_action do
+    auth_as(:member)
+  end
 
   def index
     questions = Question.take(10)
@@ -56,10 +57,6 @@ class QuestionsController < ApplicationController
 
   def update_question_params
     params.require(:question).permit(:content, :language, :title, :difficulty)
-  end
-
-  def confirm_role
-    can? :manage, Question
   end
 
 end
