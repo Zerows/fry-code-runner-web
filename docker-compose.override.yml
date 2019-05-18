@@ -5,7 +5,7 @@ services:
     container_name: "code-fry-app"
     volumes:
       - ./:/app
-      - ./var/run/postgresql/:/var/run/postgresql/
+      - pg-volume:/var/run/postgresql/
     environment:
       - NODE_ENV=development
     ports:
@@ -32,4 +32,7 @@ services:
     volumes:
       - ./test_data:/test_data
       - ./data/postgres:/var/lib/postgresql/data
-      - ./var/run/postgresql/:/var/run/postgresql/
+      - pg-volume:/var/run/postgresql/
+
+volumes:
+  pg-volume:
