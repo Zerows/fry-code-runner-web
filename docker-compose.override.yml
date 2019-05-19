@@ -6,7 +6,6 @@ services:
     volumes:
       - ./:/app
       - pg-volume:/var/run/postgresql/
-      - gembox:/box
       - node_modules:/app/frontend/node_modules
     environment:
       - NODE_ENV=development
@@ -19,7 +18,6 @@ services:
     depends_on:
       - db
       - rmq
-      - box
     command: ["./wait.sh","rabbitmq:5672 ","--", "./dev_server_start.sh"]
   rmq:
     container_name: "rabbitmq"
@@ -29,19 +27,14 @@ services:
     restart: always
     container_name: "postgres"
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: example
     volumes:
       - ./test_data:/test_data
       - ./data/postgres:/var/lib/postgresql/data
       - pg-volume:/var/run/postgresql/
-  box:
-    image: busybox
-    volumes:
-      - gembox:/box
 
 volumes:
   pg-volume:
-  gembox:
   node_modules:
