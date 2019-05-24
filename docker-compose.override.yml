@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 services:
   web:
     build: .
@@ -6,6 +6,7 @@ services:
     volumes:
       - ./:/app
       - pg-volume:/var/run/postgresql/
+      - node_modules:/app/frontend/node_modules
     environment:
       - NODE_ENV=development
     ports:
@@ -26,7 +27,7 @@ services:
     restart: always
     container_name: "postgres"
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: example
     volumes:
@@ -36,3 +37,4 @@ services:
 
 volumes:
   pg-volume:
+  node_modules:
