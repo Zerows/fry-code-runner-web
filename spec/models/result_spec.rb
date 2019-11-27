@@ -8,6 +8,5 @@ RSpec.describe Result, type: :model do
 
   # Validation test
   # ensure the enum gets the properly values
-  it { should define_enum_for(:status)
-               .with({ in_queue: 0, in_progress: 1, completed: 2, cancelled: 3 }) }
+  it { should define_enum_for(:status).with({ in_queue: 0, in_progress: 1, completed: 2, cancelled: 3 }) }
 end
