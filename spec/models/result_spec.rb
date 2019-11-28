@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# Test suite for the Pads model
+# Test suite for the Result model
 RSpec.describe Result, type: :model do
   # Association test
   # ensure Pad model has a 1:m relationship with the Results model
