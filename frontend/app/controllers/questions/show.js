@@ -13,6 +13,9 @@ export default Controller.extend(CodeRunner, {
         this.set('saving', false);
       });
     },
+    onUpdate(event, val) {
+      this.model.set('content', val);
+    },
     dryRun(question) {
       let tempResult = this.store.createRecord('result', {
         status: 'in_queue'
