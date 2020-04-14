@@ -1,13 +1,13 @@
-import DS from 'ember-data';
+import Model, {attr} from '@ember-data/model';
 
-export default DS.Model.extend({
-  content: DS.attr('string'),
-  title: DS.attr('string'),
-  language: DS.attr('string'),
-  difficulty: DS.attr(),
-  slug: DS.attr('string'),
+export default Model.extend({
+  content: attr('string'),
+  title: attr('string'),
+  language: attr('string'),
+  difficulty: attr(),
+  slug: attr('string'),
 
-  dryRun(){
+  dryRun() {
     const adapter = this.store.adapterFor(this.constructor.modelName);
     return adapter.dryRun(this);
   }

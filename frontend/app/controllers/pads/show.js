@@ -14,25 +14,24 @@ export default Controller.extend(CodeRunner, {
     const socket = this.websockets.socketFor('ws://192.168.1.226:4000');
     this.set('socket', socket);
     socket.on('connect', () => {
-      console.log('connect');
+
     });
     socket.on('event', (message) => {
-      console.log(message);
       var deltas = [];
       deltas[0] = message;
       run(() => {
         this.set('canPublish', false);
-        this.get('editor').getSession().getDocument().applyDeltas(deltas);
+        this.editor.getSession().getDocument().applyDeltas(deltas);
         this.set('canPublish', true);
       });
     });
     socket.on('close', () => {
-      console.log('close');
+
     });
 
   },
   submitText: computed('result', function () {
-    let result = this.get('result');
+    let result = this.result;
     let status = result != null ? result.get('status') : "";
     if (status == 'in_queue') {
       return "Submitting"
@@ -56,15 +55,15 @@ export default Controller.extend(CodeRunner, {
         tempResult.unloadRecord();
         this.set('result', result);
         this.poll();
-      }, (err) => {
-        console.log(err);
+      }, () => {
+
       });
     },
     save(pad) {
       this.set('saving', true);
       pad.save().then(() => {
         this.set('saving', false);
-      }, (err) => {
+      }, () => {
         this.set('saving', false);
       });
     },
@@ -72,10 +71,10 @@ export default Controller.extend(CodeRunner, {
       this.set('editor', editor);
     },
     onUpdate(event, val) {
-      this.get('model').set('content', val);
+      this.model.set('content', val);
       run(() => {
-        if (this.get('canPublish')) {
-          this.get('socket').emit('event', event);
+        if (this.canPublish) {
+          this.socket.emit('event', event);
         }
       });
     },
@@ -87,7 +86,7 @@ export default Controller.extend(CodeRunner, {
       this.set('showQuestions', false);
     },
     onSelect(question) {
-      let model = this.get('model');
+      let model = this.model;
       model.setProperties({
         'content': question.content,
         'language': question.language

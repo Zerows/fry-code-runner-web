@@ -6,12 +6,12 @@ export default Controller.extend({
     logging: false,
     actions: {
         signup() {
-            this.set('logging', true);
-            let options  = {name: this.get('name')};
-            this.get('session').authenticate(this.authenticator, options).catch((message) => {
-                this.set('logging', false);
-                this.set('error', message);
-              });
+          this.set('logging', true);
+          let options = {name: this.name};
+          this.session.authenticate(this.authenticator, options).catch((message) => {
+            this.set('logging', false);
+            this.set('error', message);
+          });
         }
     }
 });

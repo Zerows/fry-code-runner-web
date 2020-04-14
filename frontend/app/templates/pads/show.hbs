@@ -7,7 +7,7 @@
         </div>
         {{#if session.isAuthenticated}}
         <div class="col-2">
-          <button class="btn btn-primary btn-sm text-truncate"  onClick={{action "showQuestionModal" model}}  disabled={{showLoader}}>
+          <button type="button" class="btn btn-primary btn-sm text-truncate"  onClick={{action "showQuestionModal" model}}  disabled={{showLoader}}>
             Questions
           </button>
         </div>
@@ -49,13 +49,13 @@
       <div class="row justify-content-end">
         {{#if session.isAuthenticated}}
         <div class="col-3">
-          <button class="btn btn-primary btn-block text-truncate"  onClick={{action "save" model}}  disabled={{showLoader}}>
+          <button type="button" class="btn btn-primary btn-block text-truncate"  onClick={{action "save" model}}  disabled={{showLoader}}>
             {{saveText}}
           </button>
         </div>
         {{/if}}
         <div class="col-3">
-          <button class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}} disabled={{showLoader}}>
+          <button type="button" class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}} disabled={{showLoader}}>
             {{submitText}}
           </button>
         </div>

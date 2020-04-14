@@ -8,7 +8,7 @@ export default Controller.extend({
   actions: {
     authenticate(credentials) {
       this.set('logging', true);
-      this.get('session').authenticate(this.authenticator, credentials).catch((message) => {
+      this.session.authenticate(this.authenticator, credentials).catch((message) => {
         this.set('logging', false);
         this.set('error', message);
       });

@@ -5,15 +5,15 @@ export default Controller.extend({
   session: service(),
 
   authenticate() {
-    let { identification, password } = this.getProperties('identification', 'password');
-    this.get('session').authenticate('authenticator:custom', identification, password).catch((reason) => {
+    let {identification, password} = {identification: this.identification, password: this.password};
+    this.session.authenticate('authenticator:custom', identification, password).catch((reason) => {
       this.set('errorMessage', reason.error || reason);
     });
   },
 
   actions: {
     invalidateSession() {
-      this.get('session').invalidate();
+      this.session.invalidate();
       this.transitionToRoute("index");
     }
   }

@@ -32,7 +32,7 @@ export default Base.extend({
             token: response.auth_token
           });
         });
-      }, function (xhr, status, error) {
+      }, function (xhr) {
         let response = xhr.responseJSON;
         run(function () {
           reject(response);

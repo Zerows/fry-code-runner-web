@@ -8,22 +8,22 @@ export default Mixin.create({
         this.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
     },
     isApiInProgress: function () {
-        let result = this.get('result');
-        let status = result != null ? result.get('status') : "";
-        if (status == 'in_queue'
-            || status == 'in_progress') {
-            return true;
-        } else {
-            return false;
-        }
+      let result = this.result;
+      let status = result != null ? result.status : "";
+      if (status == 'in_queue'
+        || status == 'in_progress') {
+        return true;
+      } else {
+        return false;
+      }
     },
     showLoader: computed('result', 'saving', function () {
-        let finalVal = this.isApiInProgress() || this.get('saving');
+      let finalVal = this.isApiInProgress() || this.saving;
         return finalVal;
     }),
     saving: false,
     saveText: computed('saving', function () {
-        let result = this.get('saving');
+      let result = this.saving;
         if (result) {
             return 'Saving'
         } else {
@@ -32,18 +32,18 @@ export default Mixin.create({
     }),
     maxPoll: 10,
     poll(current = 0) {
-        let result = this.get('result');
+      let result = this.result;
         later(() => {
             result.reload().then((model) => {
                 this.notifyPropertyChange('result');
                 let canPoll = model.status == 'in_queue' || model.status == 'in_progress';
-                canPoll = canPoll && current <= this.get('maxPoll');
-                if (canPoll) {
-                    this.poll(++current);
-                }
-                if (current >= this.get('maxPoll')) {
-                    model.set('status', 'cancelled');
-                }
+              canPoll = canPoll && current <= this.maxPoll;
+              if (canPoll) {
+                this.poll(++current);
+              }
+              if (current >= this.maxPoll) {
+                model.set('status', 'cancelled');
+              }
             })
         }, 1000);
     }

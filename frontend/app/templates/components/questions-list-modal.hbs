@@ -5,7 +5,7 @@
     {{#modal.body}}
     <ul class="list-group list-group-flush p-0">
         {{#each questions as |question|}}
-        <li {{action "onSelect" question on="click"}} class="question-list list-group-item d-flex justify-content-between align-items-center pointer">
+        <li role="button" {{action "onSelect" question on="click"}} class="question-list list-group-item d-flex justify-content-between align-items-center pointer">
         <span>
             {{question.title}} 
             <span class="badge badge-primary badge-pill">{{capitalize question.difficulty}}</span>

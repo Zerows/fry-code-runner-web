@@ -1,8 +1,8 @@
-import DS from 'ember-data';
+import Model, {attr} from '@ember-data/model';
 
-export default DS.Model.extend({
-  status: DS.attr(),
-  error: DS.attr(),
-  pad: DS.attr(),
-  htmlOutput: DS.attr(),
+export default Model.extend({
+  status: attr(),
+  error: attr(),
+  pad: attr(),
+  htmlOutput: attr()
 });
