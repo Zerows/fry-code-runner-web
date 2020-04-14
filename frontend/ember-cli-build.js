@@ -9,11 +9,15 @@ module.exports = function(defaults) {
       'importBootstrapCSS': false
     },
     sassOptions: {
-      extension: 'scss'
+      extension: 'scss',
+      sourceMapEmbed: true,
     },
     'ember-font-awesome': {
       useScss: true, // for ember-cli-sass
       includeComponent: true
+    },
+    autoprefixer: {
+      sourcemap: true,
     },
     ace: {
       themes: ['monokai'],
