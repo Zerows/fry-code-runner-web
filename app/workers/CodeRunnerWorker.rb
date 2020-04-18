@@ -5,8 +5,8 @@ class CodeRunnerWorker
   from_queue 'rpc_queue'
 
   def work(msg)
-
-    puts msg
-    ack!
+    hash = JSON.parse(msg)
+    result = Result.find(hash["result_id"])
+    result.update({output:  "Shrikanth", status: :completed})
   end
 end
