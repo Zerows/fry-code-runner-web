@@ -50,7 +50,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rspec-rails', '~> 3.5'
-  gem 'ruby-debug-ide', '~> 0.6.0'
+  gem 'ruby-debug-ide', '~> 0.7.2'
   gem 'debase'
   #gem "rails-erd"
 end
@@ -67,3 +67,4 @@ gem 'faker'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "ember-cli-rails"
 gem "bunny", ">= 2.9.2"
+gem 'sneakers'
