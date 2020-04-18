@@ -50,7 +50,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rspec-rails', '~> 3.5'
-  gem 'ruby-debug-ide', '~> 0.6.0'
+  gem 'ruby-debug-ide', '~> 0.7.2'
   gem 'debase'
   #gem "rails-erd"
 end
