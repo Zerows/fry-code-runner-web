@@ -10,7 +10,6 @@ class PadsController < ApplicationController
 
   def index
     pads = current_user.pads.take(10)
-    print "*********************"
     if pads.empty?
       render json: {"pads": []}
     else

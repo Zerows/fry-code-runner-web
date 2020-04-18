@@ -51,7 +51,7 @@
     "ember-truth-helpers": "^2.1.0",
     "ember-websockets": "^7.2.0",
     "ember-welcome-page": "^4.0.0",
-    "eslint-plugin-ember": "^8.2.0",
+    "eslint-plugin-ember": "^8.4.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^1.2.0",
     "sass": "^1.26.3"
