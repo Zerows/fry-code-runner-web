@@ -18,7 +18,8 @@ module.exports = {
     'ember/no-jquery': 'warn',
     'ember/no-new-mixins': 'warn',
     'ember/no-mixins': 'warn',
-    'ember/avoid-leaking-state-in-ember-objects': 'warn'
+    'ember/avoid-leaking-state-in-ember-objects': 'warn',
+    'ember/require-computed-property-dependencies': 'warn'
   },
   overrides: [
     // node files

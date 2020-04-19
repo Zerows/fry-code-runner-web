@@ -27,7 +27,7 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
         this.controller.set('result', null);
         this.poll(result)
       } catch (error) {
-        console.log(error)
+        this.controller.set('result', null);
       }
     },
     async savePad(pad) {
