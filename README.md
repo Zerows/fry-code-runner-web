@@ -1,3 +1,9 @@
+
+
+![Ruby](https://github.com/Zerows/fry-code-runner-web/workflows/Ruby/badge.svg?branch=master)
+![Node.js CI](https://github.com/Zerows/fry-code-runner-web/workflows/Node.js%20CI/badge.svg?branch=master)
+
+
 ## Development Setup
 
 1. docker-compose up
