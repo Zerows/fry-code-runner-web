@@ -49,22 +49,25 @@
     color: $light;
   }
 }
-#landing-backstretch{
-  background: $dark;
-}
 .landing{
+  background: $dark;
   .title{
     color: $light;
     font-size: 4em;
   }
   .description{
     color: $light;
-    font-size: 1.4em;
+    font-size: .3em;
   }
 }
 
 .pointer{
   cursor: pointer;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
 }
 
 .question-list{
