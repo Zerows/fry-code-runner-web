@@ -6,7 +6,7 @@ export default RESTAdapter.extend({
   host: window.location.origin,
   namespace: 'api',
   session: service(),
-  headers: computed(this.session.data, function () {
+  headers: computed(function () {
     let { token } = this.session.data.authenticated;
     if (token !== undefined) {
       return {
