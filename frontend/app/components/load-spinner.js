@@ -1,21 +1,20 @@
 import Component from '@ember/component';
-import { once } from '@ember/runloop'
+
 
 export default Component.extend({
+  height: 10,
+  width: 10,
+  radius: 10,
   didReceiveAttrs() {
     this._super(...arguments);
     let size = this.size || 10;
     this.set('size', size);
   },
   didInsertElement() {
-    this.$().css('display', 'inline-block');
-    once('afterRender', this.afterRender);
-  },
-  afterRender() {
-    let loaders = this.$('.loading-dots--dot')
-    let size = this.size;
-    loaders.height(size);
-    loaders.width(size);
-    loaders.css('border-radius', size / 2 + "px");
+    this.element.style.setProperty('display', 'inline-block')
+    this.set('height', this.size+"px");
+    this.set('width', this.size+"px");
+    this.set('radius', (this.size / 2)+ "px");
+    this.set('display', "inline-block");
   }
 });
