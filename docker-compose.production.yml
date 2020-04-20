@@ -4,12 +4,19 @@ services:
     build: .
     container_name: "code-fry-app"
     restart: always
+    volumes:
+      - ./:/app
+      - pg-volume:/var/run/postgresql/
+      - node_modules:/app/frontend/node_modules
     environment:
       - NODE_ENV=production
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
     ports:
       - "3000:3000"
     links:
+      - db
+      - rmq
+    depends_on:
       - db
       - rmq
     command: ["./wait.sh","rabbitmq:5672 ","--", "./server_start.sh"]
@@ -26,5 +33,11 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
+      - pg-volume:/var/run/postgresql/
+
+volumes:
+  pg-volume:
+  node_modules:
