@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
       - rmq
-    command: ["./wait.sh","rabbitmq:5672 ","--", "./server_start.sh"]
+    entrypoint: ["sh", "./entrypoint.sh"]
   rmq:
     image: rabbitmq
     restart: always
