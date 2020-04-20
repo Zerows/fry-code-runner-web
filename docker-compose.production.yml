@@ -21,11 +21,13 @@ services:
       - rmq
     command: ["./wait.sh","rabbitmq:5672 ","--", "./server_start.sh"]
   rmq:
+    image: rabbitmq
     restart: always
     container_name: "rabbitmq"
     ports:
       - "5672:5672"
   db:
+    image: postgres
     container_name: "postgres"
     restart: always
     ports:
