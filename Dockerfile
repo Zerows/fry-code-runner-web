@@ -11,8 +11,5 @@ RUN useradd -ms /bin/bash admin
 RUN chown -R admin:admin /app
 RUN chmod 755 /app
 USER admin
-RUN bundle check || bundle install
-RUN bundle exec rake ember:install
-RUN cd frontend && npm install
 
 
