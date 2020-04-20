@@ -1,0 +1,3 @@
+[submodule "fry-code-sockets"]
+	path = fry-code-sockets
+	url = https://github.com/Zerows/fry-code-sockets
