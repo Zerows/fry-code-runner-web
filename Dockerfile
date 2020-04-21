@@ -7,9 +7,6 @@ EXPOSE 5672
 EXPOSE 6379
 WORKDIR /app
 COPY . /app
-RUN useradd -ms /bin/bash admin
-RUN chown -R admin:admin /app
-RUN chmod 755 /app
-USER admin
+
 
 
