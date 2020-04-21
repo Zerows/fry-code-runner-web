@@ -12,12 +12,14 @@ services:
     ports:
       - "3000:3000"
       - "1234:1234"
+      - "4500:4500"
     links:
       - db
       - rmq
     depends_on:
       - db
       - rmq
+      - sockets
     command: ["./wait.sh","rabbitmq:5672 ","--", "./dev_server_start.sh"]
   rmq:
     container_name: "rabbitmq"
@@ -34,6 +36,11 @@ services:
       - ./test_data:/test_data
       - ./data/postgres:/var/lib/postgresql/data
       - pg-volume:/var/run/postgresql/
+  sockets:
+    build: ./fry-code-sockets
+    environment:
+      - NODE_ENV=development
+      - PORT=4500
 
 volumes:
   pg-volume:
