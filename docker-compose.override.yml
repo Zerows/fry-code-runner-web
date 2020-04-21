@@ -40,6 +40,9 @@ services:
   sockets:
     build: ./fry-code-sockets
     container_name: sockets
+    volumes:
+      - ./fry-code-sockets:/app
+      - node_modules_sockets:/app/node_modules
     ports:
       - "4500:4500"
     environment:
@@ -50,3 +53,4 @@ volumes:
   pg-volume:
   node_modules:
   bundle_volume:
+  node_modules_sockets:

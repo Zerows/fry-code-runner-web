@@ -7,7 +7,7 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   poller: Poller.create(),
   websockets: service('socket-io'),
   socketUrl: 'ws://localhost:4500',
-  init() {
+  activate() {
     const socket = this.websockets.socketFor(this.socketUrl);
     this.set('socket', socket);
   },
@@ -61,7 +61,7 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
       result.set('status', 'cancelled');
     })
   },
-  willDestroy() {
+  deactivate() {
     this.websockets.closeSocketFor(this.socketUrl);
   }
 });
