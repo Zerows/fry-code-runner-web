@@ -2,14 +2,25 @@ import Route from '@ember/routing/route';
 import GuestAuthenticatedRouteMixinMixin from 'frontend/mixins/guest-authenticated-route-mixin';
 import Poller from 'frontend/utils/poller'
 import {inject as service} from '@ember/service';
+import {run} from '@ember/runloop'
 
 export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   poller: Poller.create(),
   websockets: service('socket-io'),
   socketUrl: 'ws://localhost:4500',
+  canPublish: true,
   activate() {
     const socket = this.websockets.socketFor(this.socketUrl);
     this.set('socket', socket);
+    socket.on('event', (message) => {
+      var deltas = [];
+      deltas[0] = message;
+      run(() => {
+        this.set('canPublish', false);
+        this.controller.setDelta(deltas);
+        this.set('canPublish', true);
+      });
+    });
   },
   model(params) {
     return this.store.findRecord('pad', params.pad_id);
@@ -20,7 +31,14 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
     controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
   },
   actions: {
-    async fetchQuestions() {
+    onEdit(event) {
+      run(() => {
+        if (this.canPublish) {
+          this.socket.emit('event', event);
+        }
+      })
+    },
+    fetchQuestions() {
       this.controller.set('questions', this.store.findAll('question'));
     },
     async submitPadAction(pad) {
@@ -64,4 +82,5 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   deactivate() {
     this.websockets.closeSocketFor(this.socketUrl);
   }
+
 });
