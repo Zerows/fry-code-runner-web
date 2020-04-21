@@ -7,12 +7,13 @@ services:
       - ./:/app
       - pg-volume:/var/run/postgresql/
       - node_modules:/app/frontend/node_modules
+      - bundle_volume:/bundle
     environment:
       - NODE_ENV=development
+      - BUNDLE_PATH=/bundle/vendor
     ports:
       - "3000:3000"
       - "1234:1234"
-      - "4500:4500"
     links:
       - db
       - rmq
@@ -38,6 +39,9 @@ services:
       - pg-volume:/var/run/postgresql/
   sockets:
     build: ./fry-code-sockets
+    container_name: sockets
+    ports:
+      - "4500:4500"
     environment:
       - NODE_ENV=development
       - PORT=4500
@@ -45,3 +49,4 @@ services:
 volumes:
   pg-volume:
   node_modules:
+  bundle_volume:

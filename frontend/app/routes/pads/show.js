@@ -1,9 +1,16 @@
 import Route from '@ember/routing/route';
 import GuestAuthenticatedRouteMixinMixin from 'frontend/mixins/guest-authenticated-route-mixin';
 import Poller from 'frontend/utils/poller'
+import {inject as service} from '@ember/service';
 
 export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   poller: Poller.create(),
+  websockets: service('socket-io'),
+  socketUrl: 'ws://localhost:4500',
+  init() {
+    const socket = this.websockets.socketFor(this.socketUrl);
+    this.set('socket', socket);
+  },
   model(params) {
     return this.store.findRecord('pad', params.pad_id);
   },
@@ -53,5 +60,8 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
       this.controller.set('polling', false)
       result.set('status', 'cancelled');
     })
+  },
+  willDestroy() {
+    this.websockets.closeSocketFor(this.socketUrl);
   }
 });
