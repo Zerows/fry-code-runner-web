@@ -1,10 +1,11 @@
 import Base from 'ember-simple-auth/authenticators/base';
 import {Promise, resolve} from 'rsvp';
 import {isEmpty} from '@ember/utils'
-import $ from 'jquery'
+import {inject as service} from '@ember/service';
 import {run} from '@ember/runloop'
 
 export default Base.extend({
+  store: service(),
   tokenEndpoint: window.location.origin + '/api/auth/login',
   restore: function (data) {
     return new Promise(function (resolve, reject) {
@@ -17,28 +18,22 @@ export default Base.extend({
   },
 
   authenticate: function (options) {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        url: this.tokenEndpoint,
-        type: 'POST',
-        data: JSON.stringify({
-          email: options.email,
-          password: options.password
-        }),
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json'
-      }).then(function (response) {
-        run(function () {
+    let session = this.store.createRecord('user-session')
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        let data = await session.authenticate(options)
+        run(() => {
           resolve({
-            token: response.auth_token
+            token: data.auth_token
           });
-        });
-      }, function (xhr) {
-        let response = xhr.responseJSON;
-        run(function () {
-          reject(response);
-        });
-      });
+        })
+      } catch (error) {
+        run(() => {
+          reject(error);
+        })
+
+      }
     });
   },
 
