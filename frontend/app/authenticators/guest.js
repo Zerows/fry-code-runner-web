@@ -39,6 +39,6 @@ export default Base.extend({
   },
 
   invalidate: function () {
-    return this.session.invalidate()();
+    return this.session.invalidate();
   }
 });

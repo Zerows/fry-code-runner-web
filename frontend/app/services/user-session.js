@@ -6,7 +6,7 @@ export default Service.extend({
   save(data) {
     this.set('data', data)
   },
-  invalidate() {
+  async invalidate() {
     this.set('data', null)
   },
   async authenticate(options) {
