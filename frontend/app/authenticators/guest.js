@@ -1,15 +1,17 @@
 import Base from 'ember-simple-auth/authenticators/base';
-import {Promise, resolve} from 'rsvp';
+import {Promise} from 'rsvp';
 import {isEmpty} from '@ember/utils'
 import {inject as service} from '@ember/service';
 import {run} from '@ember/runloop'
 
 export default Base.extend({
   store: service(),
+  session: service('user-session'),
   restore: function (data) {
-    return new Promise(function (resolve, reject) {
-      if (!isEmpty(data.token)) {
-        resolve(data);
+    this.session.save(data)
+    return new Promise((resolve, reject) => {
+      if (!isEmpty(this.session.token())) {
+        resolve(this.session.data);
       } else {
         reject();
       }
@@ -17,24 +19,26 @@ export default Base.extend({
   },
 
   authenticate: function (options) {
-    let session = this.store.createRecord('user-session')
     return new Promise(async (resolve, reject) => {
       try {
-        let data = await session.authenticateGuest(options)
+        let response = await this.session.authenticateGuest(options)
+        this.session.save({
+          session: response,
+          token: response.userSession.token
+        })
         run(() => {
-          resolve({
-            token: data.auth_token
-          });
+          resolve(this.session.data)
         })
       } catch (error) {
         run(() => {
           reject(error);
         })
+
       }
     });
   },
 
   invalidate: function () {
-    return resolve();
+    return this.session.invalidate()();
   }
 });

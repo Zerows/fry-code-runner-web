@@ -6,10 +6,11 @@ class AuthenticateUser
 
   # Service entry point
   def call
-    JsonWebToken.encode(user_id: user.id) if user
+    [JsonWebToken.encode(user_id: user.id), user] if user
   end
 
   private
+
   # verify user credentials
   def user
     user = User.find_by(email: @email)
