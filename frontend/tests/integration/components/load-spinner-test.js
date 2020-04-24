@@ -14,17 +14,5 @@ module('Integration | Component | load-spinner', function (hooks) {
 
     assert.equal(this.element.textContent.trim(), '');
 
-    // Template block usage:
-    await render(hbs`
-      {{#load-spinner}}
-        <div class="loading-dots {{unless show "d-none"}}">
-          <div class="loading-dots--dot" style={{html-safe (concat "height:" height ";width:" width ";border-radius:" radius)}}></div>
-          <div class="loading-dots--dot" style={{html-safe (concat "height:" height ";width:" width ";border-radius:" radius)}}></div>
-          <div class="loading-dots--dot" style={{html-safe (concat "height:" height ";width:" width ";border-radius:" radius)}}></div>
-        </div>
-      {{/load-spinner}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });

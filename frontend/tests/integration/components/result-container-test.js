@@ -1,12 +1,12 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import {module, test} from 'qunit';
+import {setupRenderingTest} from 'ember-qunit';
+import {render} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | result-container', function(hooks) {
+module('Integration | Component | result-container', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
@@ -15,12 +15,5 @@ module('Integration | Component | result-container', function(hooks) {
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
-    await render(hbs`
-      {{#result-container}}
-        template block text
-      {{/result-container}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });
