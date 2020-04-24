@@ -4,7 +4,7 @@ import {setupRenderingTest} from 'ember-qunit';
 module('Integration | Component | questions-list-modal', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
+  test('it renders', async function () {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
   });
