@@ -28,6 +28,10 @@ docker-compose build (To build new images (run if you made any changes in your d
 
 docker system prune (kills all existing images)
 
+IF rails not working inside the container
+
+> bundle exec rake app:update:bin
+
 
 ## Rake commands to setup the app
 

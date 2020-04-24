@@ -2,6 +2,8 @@ class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
   include RoleHandler
+  include ActionDispatch
+
   attr_reader :current_user
 
   private

@@ -9,8 +9,18 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   websockets: service('socket-io'),
   socketUrl: 'ws://localhost:4500',
   canPublish: true,
-  activate() {
-    const socket = this.websockets.socketFor(this.socketUrl);
+  model(params) {
+    return this.store.findRecord('pad', params.pad_id);
+  },
+  setupController(controller, model) {
+    controller.set('model', model);
+    controller.set('result', null);
+    controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
+    const socket = this.websockets.socketFor(this.socketUrl, {
+      query: {
+        room: model.slug
+      }
+    });
     this.set('socket', socket);
     socket.on('event', (message) => {
       var deltas = [];
@@ -21,14 +31,6 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
         this.set('canPublish', true);
       });
     });
-  },
-  model(params) {
-    return this.store.findRecord('pad', params.pad_id);
-  },
-  setupController(controller, model) {
-    controller.set('model', model);
-    controller.set('result', null);
-    controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
   },
   actions: {
     onEdit(event) {

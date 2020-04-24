@@ -8,11 +8,9 @@ class UsersController < ApplicationController
   end
 
   def guest
-
     user = User.create!(guest_user_params)
     auth_token = AuthenticateGuestUser.new(user).call
-    response = { message: Message.account_created, auth_token: auth_token }
-    json_response(response, :created)
+    render json: UserSession.new(auth_token, user)
   end
 
   private
@@ -22,6 +20,6 @@ class UsersController < ApplicationController
   end
 
   def guest_user_params
-    params.require(:user).permit(:name)
+    params.permit(:name)
   end
 end

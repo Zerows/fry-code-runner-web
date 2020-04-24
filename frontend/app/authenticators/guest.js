@@ -1,15 +1,17 @@
 import Base from 'ember-simple-auth/authenticators/base';
-import {Promise, resolve} from 'rsvp';
+import {Promise} from 'rsvp';
 import {isEmpty} from '@ember/utils'
-import $ from 'jquery'
+import {inject as service} from '@ember/service';
 import {run} from '@ember/runloop'
 
 export default Base.extend({
-  tokenEndpoint: window.location.origin + '/api/guest',
+  store: service(),
+  session: service('user-session'),
   restore: function (data) {
-    return new Promise(function (resolve, reject) {
-      if (!isEmpty(data.token)) {
-        resolve(data);
+    this.session.save(data)
+    return new Promise((resolve, reject) => {
+      if (!isEmpty(this.session.token())) {
+        resolve(this.session.data);
       } else {
         reject();
       }
@@ -17,31 +19,26 @@ export default Base.extend({
   },
 
   authenticate: function (options) {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        url: this.tokenEndpoint,
-        type: 'POST',
-        data: JSON.stringify({
-          name: options.name
-        }),
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json'
-      }).then(function (response) {
-        run(function () {
-          resolve({
-            token: response.auth_token
-          });
-        });
-      }, function (xhr) {
-        let response = xhr.responseJSON;
-        run(function () {
-          reject(response);
-        });
-      });
+    return new Promise(async (resolve, reject) => {
+      try {
+        let response = await this.session.authenticateGuest(options)
+        this.session.save({
+          session: response,
+          token: response.userSession.token
+        })
+        run(() => {
+          resolve(this.session.data)
+        })
+      } catch (error) {
+        run(() => {
+          reject(error);
+        })
+
+      }
     });
   },
 
   invalidate: function () {
-    return resolve();
+    return this.session.invalidate();
   }
 });
