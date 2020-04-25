@@ -20,5 +20,8 @@ export default Service.extend({
   },
   token() {
     return this.data.session.userSession.token
+  },
+  socketUrl() {
+    return this.data.session.userSession.socketUrl
   }
 });

@@ -7,7 +7,7 @@ import {run} from '@ember/runloop'
 export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   poller: Poller.create(),
   websockets: service('socket-io'),
-  socketUrl: 'ws://localhost:4500',
+  session: service('user-session'),
   canPublish: true,
   model(params) {
     return this.store.findRecord('pad', params.pad_id);
@@ -16,7 +16,7 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
     controller.set('model', model);
     controller.set('result', null);
     controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
-    const socket = this.websockets.socketFor(this.socketUrl, {
+    const socket = this.websockets.socketFor(this.session.socketUrl(), {
       query: {
         room: model.slug
       }
