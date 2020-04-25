@@ -1,17 +1,20 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 
 export default Controller.extend({
   authenticator: 'authenticator:custom',
   logging: false,
   session: service(),
   actions: {
-    authenticate(credentials) {
+    async authenticate(credentials) {
       this.set('logging', true);
-      this.session.authenticate(this.authenticator, credentials).catch((message) => {
+      try {
+        await this.session.authenticate(this.authenticator, credentials)
         this.set('logging', false);
-        this.set('error', message);
-      });
+      } catch (error) {
+        this.set('logging', false);
+        this.set('errors', error.payload.errors);
+      }
     }
   }
 });
