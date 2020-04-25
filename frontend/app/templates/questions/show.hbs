@@ -1,49 +1,61 @@
 <div class='pad-content container-fluid'>
-  <div class="row bg-dark border-bottom border-primary p-1 border-right border-primary justify-content-center">
+  <div {{ref this "top-element"}}
+          class="row bg-dark border-bottom border-primary p-1 border-right border-primary justify-content-center">
     <div class="col-6">
-      <input type="text" class="title form-control px-1" value={{model.title}} onchange={{action (mut model.title) value="target.value"}}>
+      <input type="text" class="title form-control px-1" value={{model.title}} onchange={{action (mut model.title)
+                                                                                                 value="target.value"}}>
     </div>
     <div class="col-2">
-      <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.language) value="target.value"}}>
+      <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.language)
+                                                                                               value="target.value"}}>
         {{#each supportedLanguages as |rec|}}
-        <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
+          <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
         {{/each}}
       </select>
     </div>
-    <div class="col-2">
-      <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.difficulty) value="target.value"}}>
+    <div class="col-3">
+      <select class="custom-select custom-select-sm" disabled={{showLoader}}
+              onchange={{action (mut model.difficulty) value="target.value"}}>
         {{#each difficulty as |rec|}}
-        <option selected={{eq rec model.difficulty}} value={{rec}}>{{capitalize rec}}</option>
+          <option selected={{eq rec model.difficulty}} value={{rec}}>{{capitalize rec}}</option>
         {{/each}}
       </select>
     </div>
   </div>
+  {{#height-wrapper fontSize=14 lineHeight=1.8 top=top-element bottom=bottom-element as | height lines |}}
+    <div class="row monokai-bg">
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10 ">
 
-  <div class="row monokai-bg p-1">
-    <div class="col-6 col-lg-6 col-md-6 col-sm-10 ">
-      {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-      lines=30 mode=(concat "ace/mode/" model.language)
-      value=model.content update=(action 'onUpdate')}}
-    </div>
-    <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
-      <div>
-        {{#result-container class='code-output' result=result }}{{/result-container}}
+        {{ember-ace
+                showPrintMargin=false
+                theme="ace/theme/monokai"
+                editorClass='editor'
+                lines=lines
+                mode=(concat "ace/mode/" model.language)
+                value=model.content
+                update=(action 'onUpdate')}}
+      </div>
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
+        <div>
+          {{#result-container class='code-output' result=result  height=height }}{{/result-container}}
+        </div>
       </div>
     </div>
-  </div>
+  {{/height-wrapper}}
 </div>
-
-<div class="container-fluid p-3 bg-dark border-top border-primary">
+<div class="container-fluid p-3 bg-dark border-top border-primary sticky bottom" {{ref this "bottom-element"}}>
   <div class="row">
     <div class="col-6">
       <div class="row justify-content-end">
         <div class="col-3">
-          <button type='button' class="btn btn-primary btn-block text-truncate" onClick={{action "dryRun" model}} disabled={{showLoader}}>
+          <button type='button' class="btn btn-primary btn-block text-truncate" onClick={{action "dryRun" model}}
+                  disabled={{showLoader}}>
             Dry Run
           </button>
         </div>
         <div class="col-3">
-          <button type='button' class="btn btn-success btn-block text-truncate" onClick={{action "saveQuestion" model}} disabled={{showLoader}}>
+          <button type='button' class="btn btn-success btn-block text-truncate" onClick={{action "saveQuestion" model}}
+                  disabled={{showLoader}}>
             {{saveText}}
           </button>
         </div>

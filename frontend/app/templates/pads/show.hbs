@@ -1,6 +1,6 @@
 <div class='pad-content container-fluid'>
-  <div id='pad-header' {{ref this "top-element"}}
-       class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
+  <div {{ref this "top-element"}}
+          class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
     <div class="col-6">
       <div class="row">
         <div class="col-7">
@@ -33,14 +33,17 @@
     </div>
   </div>
   {{#height-wrapper fontSize=14 lineHeight=1.8 top=top-element bottom=bottom-element as | height lines |}}
-    <div class="row monokai-bg p-1">
-      <div class="col-6 col-lg-6 col-md-6 col-sm-10" style={{html-safe (concat "height:" height ";")}}>
-        {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-                    lines=lines
-                    editorClass='editor'
-                    mode=(concat "ace/mode/" model.language)
-                    ready=(action 'onEditorReady')
-                    value=model.content update=(action 'onUpdate')}}
+    <div class="row monokai-bg">
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10">
+        {{ember-ace
+                showPrintMargin=false
+                theme="ace/theme/monokai"
+                lines=lines
+                editorClass='editor'
+                mode=(concat "ace/mode/" model.language)
+                ready=(action 'onEditorReady')
+                value=model.content
+                update=(action 'onUpdate')}}
       </div>
       <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
         <div>
@@ -51,7 +54,7 @@
   {{/height-wrapper}}
 </div>
 
-<div  {{ref this "bottom-element"}} class="container-fluid p-3 bg-dark border-top border-primary sticky bottom">
+<div {{ref this "bottom-element"}} class="container-fluid p-3 bg-dark border-top border-primary sticky bottom">
   <div class="row">
     <div class="col-6">
       <div class="row justify-content-end">
