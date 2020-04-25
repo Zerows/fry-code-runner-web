@@ -46,6 +46,7 @@
     font-size: 1.2rem;
   }
   .output {
+    overflow: scroll;
     color: $light;
   }
 }
@@ -70,8 +71,20 @@
   height: 100%;
 }
 
-.question-list{
-  &:hover{
+.question-list {
+  &:hover {
     background-color: $light;
   }
+}
+
+.editor {
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+
+.sticky.bottom {
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
 }
