@@ -82,7 +82,7 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
     })
   },
   deactivate() {
-    this.websockets.closeSocketFor(this.socketUrl);
+    this.websockets.closeSocketFor(this.session.socketUrl());
   }
 
 });
