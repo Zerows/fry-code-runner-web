@@ -7,7 +7,7 @@
 
   <div class="row justify-content-end">
     <div class="m-3">
-      {{#bs-button class='pull-right' disabled=loading type="success" onClick=(action "createPad")}}
+      {{#bs-button class='pull-right' disabled=loading type="success" onClick=(action "onCreatePad")}}
         Create Pad
       {{/bs-button}}
     </div>
@@ -30,7 +30,7 @@
           <td scope="col">{{capitalize rec.language}}</td>
           <td scope="col">
             {{#bs-button outline=true type="danger" onClick=(action "deletePad" rec)}}
-            {{fa-icon 'trash'}}
+              {{fa-icon 'trash'}}
             {{/bs-button}}
           </td>
         </tr>
@@ -39,3 +39,8 @@
     </table>
   </div>
 </div>
+
+{{#if showLanguagePicker}}
+  {{pick-language languages=userSession.languages onHidden=(action 'onPickerHidden')
+                  onSelect=(action 'onSelectLanguage')}}
+{{/if}}
