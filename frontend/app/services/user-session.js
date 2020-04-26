@@ -1,5 +1,6 @@
 import Service, {inject as service} from '@ember/service';
-import {computed} from '@ember/object'
+import {reads} from '@ember/object/computed';
+
 
 export default Service.extend({
   data: null,
@@ -25,7 +26,5 @@ export default Service.extend({
   socketUrl() {
     return this.data.session.userSession.socketUrl
   },
-  name: computed('data', function () {
-    return this.data.session.userSession.name
-  })
+  name: reads('data.session.userSession.name')
 });
