@@ -49,9 +49,10 @@ class QuestionsController < ApplicationController
 
   def create_question_params
     title = Faker::Book.title
-    params.require(:question).permit(:content, :language)
+    current_params = params.require(:question).permit(:content, :language)
+    current_params
         .merge(title: title)
-        .merge(language: 'java')
+        .merge(language: current_params[:language])
         .merge(content: "//#{title}")
   end
 
