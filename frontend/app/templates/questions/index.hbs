@@ -1,8 +1,14 @@
 <div class="container">
+  <div class="row justify-content-center mt-5">
+    {{#if errors}}
+      <div class="alert alert-danger">{{errors.[0]}}</div>
+    {{/if}}
+  </div>
+
   <div class="row justify-content-end">
     <div class="m-3">
       {{#bs-button class='pull-right' type="success" onClick=(action "onCreateQuestion") disabled=showLoading}}
-      Create Question
+        Create Question
       {{/bs-button}}
     </div>
   </div>

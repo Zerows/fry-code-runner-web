@@ -19,9 +19,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
         let record = await newRecord.save()
         this.controller.set('showLoading', false)
         this.transitionTo('questions.show', record.slug)
-      } catch (e) {
+      } catch (error) {
         newRecord.unloadRecord()
         this.controller.set('showLoading', false)
+        this.controller.set('errors', error.errors)
       }
     },
 
