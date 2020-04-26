@@ -5,7 +5,7 @@
   </div>
   {{#navbar.content}}
     {{#navbar.nav   as |nav|}}
-      {{#if session.isAuthenticated}}
+      {{#if session.isMember}}
         {{#nav.item}}{{#nav.link-to "pads.index"}}Pads{{/nav.link-to}}{{/nav.item}}
         {{#nav.item}}{{#nav.link-to "questions.index"}}Questions{{/nav.link-to}}{{/nav.item}}
       {{/if}}
