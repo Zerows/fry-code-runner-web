@@ -1,8 +1,14 @@
 <div class="container">
+  <div class="row justify-content-center mt-5">
+    {{#if errors}}
+      <div class="alert alert-danger">{{errors.[0]}}</div>
+    {{/if}}
+  </div>
+
   <div class="row justify-content-end">
     <div class="m-3">
-      {{#bs-button class='pull-right' type="success" onClick=(action "createQuestion")}}
-      Create Question
+      {{#bs-button class='pull-right' type="success" onClick=(action "onCreateQuestion") disabled=showLoading}}
+        Create Question
       {{/bs-button}}
     </div>
   </div>
@@ -26,7 +32,7 @@
           <td scope="col">{{capitalize rec.difficulty}}</td>
           <td scope="col">
             {{#bs-button outline=true type="danger" onClick=(action "deleteQuestion" rec)}}
-            {{fa-icon 'trash'}}
+              {{fa-icon 'trash'}}
             {{/bs-button}}
           </td>
         </tr>
@@ -35,3 +41,8 @@
     </table>
   </div>
 </div>
+
+{{#if showLanguagePicker}}
+  {{pick-language languages=userSession.languages onHidden=(action 'onPickerHidden')
+                  onSelect=(action 'onSelectLanguage')}}
+{{/if}}

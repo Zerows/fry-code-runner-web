@@ -1,21 +1,21 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Poller from '../../utils/poller';
-
+import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
-    poller: Poller.create(),
+  poller: Poller.create(),
+  session: service('user-session'),
+  model(params) {
+    return this.store.findRecord('question', params.question_id);
+  },
+  setupController(controller, model) {
+    controller.set('model', model);
+    controller.set('result', null);
 
-    model(params) {
-        return this.store.findRecord('question', params.question_id);
-    },
-    setupController(controller, model) {
-        controller.set('model', model);
-        controller.set('result', null);
-        controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
-        controller.set('difficulty', ['easy', 'medium', 'hard'])
-    },
-    actions: {
+    controller.set('difficulty', ['easy', 'medium', 'hard'])
+  },
+  actions: {
         async saveQuestionAction(question) {
             try {
                 this.controller.set('saving', true);

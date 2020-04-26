@@ -22,7 +22,8 @@ module.exports = function(defaults) {
     ace: {
       themes: ['monokai'],
       modes: ['javascript', 'ruby', 'python', 'java'],
-      workers: ['javascript', 'ruby', 'python', 'java']
+      workers: ['javascript', 'ruby', 'python', 'java'],
+      exts: ['language_tools']
     }
   });
 

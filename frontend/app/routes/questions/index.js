@@ -5,5 +5,36 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Route.extend(AuthenticatedRouteMixin, {
   model() {
     return this.store.findAll('question');
+  },
+  setupController(conrtoller, model) {
+    conrtoller.set('model', model)
+  },
+  actions: {
+    async createQuestionAction(language) {
+      this.controller.set('showLoading', true)
+      let newRecord = this.store.createRecord('question', {
+        language: language
+      });
+      try {
+        let record = await newRecord.save()
+        this.controller.set('showLoading', false)
+        this.transitionTo('questions.show', record.slug)
+      } catch (error) {
+        newRecord.unloadRecord()
+        this.controller.set('showLoading', false)
+        this.controller.set('errors', error.errors)
+      }
+    },
+
+    async deleteQuestionAction(question) {
+      try {
+        this.controller.set('showLoading', true)
+        await question.destroyRecord();
+        this.controller.set('showLoading', false)
+      } catch (error) {
+        this.controller.set('showLoading', false)
+      }
+
+    }
   }
 });

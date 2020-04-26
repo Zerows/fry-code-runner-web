@@ -1,4 +1,6 @@
 import Service, {inject as service} from '@ember/service';
+import {reads} from '@ember/object/computed';
+
 
 export default Service.extend({
   data: null,
@@ -23,5 +25,7 @@ export default Service.extend({
   },
   socketUrl() {
     return this.data.session.userSession.socketUrl
-  }
+  },
+  languages: reads('data.session.userSession.availableLanguages'),
+  name: reads('data.session.userSession.name')
 });

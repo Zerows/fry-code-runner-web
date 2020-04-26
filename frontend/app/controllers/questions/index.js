@@ -1,18 +1,21 @@
 import Controller from '@ember/controller';
+import {inject as service} from '@ember/service';
 
 export default Controller.extend({
+  userSession: service('user-session'),
   actions: {
-    createQuestion() {
-      //let language = "javascript";
-      let newRecord = this.store.createRecord('question', {
-      });
-      newRecord.save().then((record) => {
-        this.transitionToRoute('questions.show', record.slug)
-      });
+    onCreateQuestion() {
+      this.set('showLanguagePicker', true);
     },
-
+    onSelectLanguage(language) {
+      this.set('showLanguagePicker', false);
+      this.send('createQuestionAction', language);
+    },
     deleteQuestion(question) {
-      question.destroyRecord();
-    }
+      this.send('deleteQuestionAction', question);
+    },
+    onPickerHidden() {
+      this.set('showLanguagePicker', false);
+    },
   }
 });

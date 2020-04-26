@@ -1,21 +1,25 @@
 <div class='pad-content container-fluid'>
-  <div class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
+  <div {{ref this "top-element"}}
+          class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
     <div class="col-6">
       <div class="row">
         <div class="col-7">
-          <input type="text" class="title form-control px-1" value={{model.filename}} onchange={{action (mut model.filename) value="target.value"}}>
+          <input type="text" class="title form-control px-1" value={{model.filename}}
+                 onchange={{action (mut model.filename) value="target.value"}}>
         </div>
         {{#if session.isAuthenticated}}
-        <div class="col-2">
-          <button type="button" class="btn btn-primary btn-sm text-truncate"  onClick={{action "showQuestionModal" model}}  disabled={{showLoader}}>
-            Questions
-          </button>
-        </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-primary btn-sm text-truncate"
+                    onClick={{action "showQuestionModal" model}} disabled={{showLoader}}>
+              Questions
+            </button>
+          </div>
         {{/if}}
         <div class="col-3">
-          <select class="custom-select custom-select-sm" disabled={{showProgress}} onchange={{action (mut model.language) value="target.value"}}>
-            {{#each supportedLanguages as |rec|}}
-            <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
+          <select class="custom-select custom-select-sm" disabled={{showProgress}}
+                  onchange={{action (mut model.language) value="target.value"}}>
+            {{#each userSession.languages as |rec|}}
+              <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
             {{/each}}
           </select>
         </div>
@@ -28,34 +32,44 @@
       </div>
     </div>
   </div>
-
-  <div class="row monokai-bg p-1">
-    <div class="col-6 col-lg-6 col-md-6 col-sm-10">
-      {{ember-ace showPrintMargin=false theme="ace/theme/monokai"
-      lines=30 mode=(concat "ace/mode/" model.language)
-      ready=(action 'onEditorReady')
-      value=model.content update=(action 'onUpdate')}}
-    </div>
-    <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
-      <div>
-        {{#result-container class='code-output' result=result }}{{/result-container}}
+  {{#height-wrapper fontSize=14 lineHeight=1.8 top=top-element bottom=bottom-element as | height lines |}}
+    <div class="row monokai-bg">
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10">
+        {{ember-ace
+                showPrintMargin=false
+                theme="ace/theme/monokai"
+                lines=lines
+                enableDefaultAutocompletion=true
+                editorClass='editor'
+                mode=(concat "ace/mode/" model.language)
+                ready=(action 'onEditorReady')
+                value=model.content
+                update=(action 'onUpdate')}}
+      </div>
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
+        <div>
+          {{#result-container class='code-output' height=height result=result }}{{/result-container}}
+        </div>
       </div>
     </div>
-  </div>
+  {{/height-wrapper}}
 </div>
-<div class="container-fluid p-3 bg-dark border-top border-primary">
+
+<div {{ref this "bottom-element"}} class="container-fluid p-3 bg-dark border-top border-primary sticky bottom">
   <div class="row">
     <div class="col-6">
       <div class="row justify-content-end">
         {{#if session.isAuthenticated}}
-        <div class="col-3">
-          <button type="button" class="btn btn-primary btn-block text-truncate"  onClick={{action "save" model}}  disabled={{showLoader}}>
-            {{saveText}}
-          </button>
-        </div>
+          <div class="col-3">
+            <button type="button" class="btn btn-primary btn-block text-truncate" onClick={{action "save" model}}
+                    disabled={{showLoader}}>
+              {{saveText}}
+            </button>
+          </div>
         {{/if}}
         <div class="col-3">
-          <button type="button" class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}} disabled={{showLoader}}>
+          <button type="button" class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}}
+                  disabled={{showLoader}}>
             {{submitText}}
           </button>
         </div>
@@ -64,5 +78,6 @@
   </div>
 </div>
 {{#if showQuestions}}
-  {{questions-list-modal questions=questions onQuestionsHidden=(action "onQuestionsHidden") onSelect=(action 'onSelect')}}
- {{/if}}
+  {{questions-list-modal questions=questions onQuestionsHidden=(action "onQuestionsHidden")
+                         onSelect=(action 'onSelect')}}
+{{/if}}

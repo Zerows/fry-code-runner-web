@@ -14,8 +14,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
-    async createPadAction() {
-      let language = "javascript";
+    async createPadAction(language) {
       let newRecord = this.store.createRecord('pad', {
         language: language
       });

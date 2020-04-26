@@ -12,7 +12,10 @@
     {{/navbar.nav}}
   {{/navbar.content}}
   {{#if session.isAuthenticated}}
-    {{#bs-button type="primary" onClick=(action "logout")}}{{fa-icon 'sign-out'}} Logout{{/bs-button}}
+    <span class="navbar-text pr-3 light">
+        Welcome, {{capitalize userSession.name}}
+      </span>
+    {{#bs-button type="outline-primary" class='btn-sm' onClick=(action "logout")}}{{fa-icon 'sign-out'}}{{/bs-button}}
   {{else}}
     {{#link-to "login" class='btn btn-primary'}}{{fa-icon 'sign-in'}} Login{{/link-to}}
   {{/if}}
