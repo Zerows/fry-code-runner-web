@@ -1,5 +1,6 @@
 import Service, {inject as service} from '@ember/service';
 import {reads} from '@ember/object/computed';
+import {computed} from '@ember/object';
 
 
 export default Service.extend({
@@ -27,5 +28,20 @@ export default Service.extend({
     return this.data.session.userSession.socketUrl
   },
   languages: reads('data.session.userSession.availableLanguages'),
-  name: reads('data.session.userSession.name')
+  name: reads('data.session.userSession.name'),
+  isMember: computed('data.session.userSession.roles', function () {
+    return hasRole('member')
+  }),
+  hasRole(role) {
+    try {
+      this.data.session.userSession.roles.forEach(element => {
+        if (element.name == role) {
+          return true
+        }
+      });
+      return false
+    } catch (error) {
+      return false
+    }
+  }
 });

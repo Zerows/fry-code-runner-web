@@ -9,6 +9,14 @@
 
 user = User.create(name: 'sriram', email: 'sriram@admin.com', password: 'admin123', password_confirmation: 'admin123')
 user.add_role(:admin)
+user.add_role(:member)
+user.save
 
 user = User.create(name: 'shrikanth', email: 'shrikanth@admin.com', password: 'admin123', password_confirmation: 'admin123')
 user.add_role(:admin)
+user.add_role(:member)
+user.save
+
+
+user = User.create(name: 'dummy', email: 'dummy@admin.com', password: 'admin123', password_confirmation: 'admin123')
+user.save

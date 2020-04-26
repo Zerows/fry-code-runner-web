@@ -1,5 +1,5 @@
 class UserSessionSerializer < ActiveModel::Serializer
-  attributes :id, :name, :token, :socket_url, :available_languages
+  attributes :id, :name, :token, :socket_url, :available_languages, :roles
 
   def socket_url
     Settings.socket_url
