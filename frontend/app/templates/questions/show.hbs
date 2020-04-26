@@ -8,7 +8,7 @@
     <div class="col-2">
       <select class="custom-select custom-select-sm" disabled={{showLoader}} onchange={{action (mut model.language)
                                                                                                value="target.value"}}>
-        {{#each supportedLanguages as |rec|}}
+        {{#each userSession.languages as |rec|}}
           <option selected={{eq rec model.language}} value={{rec}}>{{capitalize rec}}</option>
         {{/each}}
       </select>

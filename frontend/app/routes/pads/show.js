@@ -15,7 +15,6 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   setupController(controller, model) {
     controller.set('model', model);
     controller.set('result', null);
-    controller.set('supportedLanguages', ['java', 'javascript', 'python', 'ruby'])
     const socket = this.websockets.socketFor(this.session.socketUrl(), {
       query: {
         room: model.slug

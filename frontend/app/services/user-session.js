@@ -26,5 +26,6 @@ export default Service.extend({
   socketUrl() {
     return this.data.session.userSession.socketUrl
   },
+  languages: reads('data.session.userSession.availableLanguages'),
   name: reads('data.session.userSession.name')
 });

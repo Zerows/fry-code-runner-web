@@ -4,6 +4,7 @@ import {inject as service} from '@ember/service';
 
 export default Controller.extend({
   session: service(),//used in hbs for authenticated
+  userSession: service('user-session'),//user fro user related session props in hbs
   saveText: computed('saving', function () {
     if (this.saving) {
       return 'Saving'
