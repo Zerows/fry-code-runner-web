@@ -1,0 +1,16 @@
+{{#bs-modal onHidden=onHidden languages=languages as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Pick Language</h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    <div class="row">
+      {{#each languages as |language|}}
+        <div class="m-3 justify-content-center">
+          {{#bs-button type="outline-primary" class='btn-sm' onClick=(action onSelect language)}}
+            {{capitalize language}}
+          {{/bs-button}}
+        </div>
+      {{/each}}
+    </div>
+  {{/modal.body}}
+{{/bs-modal}}
