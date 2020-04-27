@@ -16,7 +16,6 @@ export default Service.extend({
     const url = "/api/auth/login";
     return await this.ajax.post(url, {data: {email: options.email, password: options.password}});
   },
-
   async authenticateGuest(options) {
     const url = "/api/guest";
     return await this.ajax.post(url, {data: {name: options.name}});
@@ -38,9 +37,11 @@ export default Service.extend({
       return false
     }
   },
+  id: reads('data.session.userSession.id'),
   languages: reads('data.session.userSession.availableLanguages'),
   name: reads('data.session.userSession.name'),
   isMember: computed('data.session.userSession.roles', function () {
     return this.hasRole('member')
-  })
+  }),
+  colors: ['#8FB9A8', '#FEFAD4', '#FCD0BA', '#F1828D', '#765D69'],
 });

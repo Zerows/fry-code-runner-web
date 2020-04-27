@@ -1,6 +1,5 @@
 <div class='pad-content container-fluid'>
-  <div {{ref this "top-element"}}
-          class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
+  <div {{ref this "top-element"}} class="row bg-dark border-bottom border-primary p-1 border-right border-primary">
     <div class="col-6">
       <div class="row">
         <div class="col-7">
@@ -58,25 +57,34 @@
 <div {{ref this "bottom-element"}} class="container-fluid p-3 bg-dark border-top border-primary sticky bottom">
   <div class="row">
     <div class="col-6">
-      <div class="row justify-content-end">
-        {{#if userSession.isMember }}
-          <div class="col-3">
-            <button type="button" class="btn btn-primary btn-block text-truncate" onClick={{action "save" model}}
+      <div class="row">
+        <div class="col-6 justify-content-start">
+          {{#each users as |user|}}
+            <label class='badge p-2 ml-2' style={{html-safe (concat "background:" user.color ";")}}> {{capitalize
+                    user.name}} </label>
+          {{/each}}
+        </div>
+        <div class="row col-6 justify-content-end">
+          {{#if userSession.isMember }}
+            <div class="col-6">
+              <button type="button" class="btn btn-primary btn-block text-truncate" onClick={{action "save" model}}
+                      disabled={{showLoader}}>
+                {{saveText}}
+              </button>
+            </div>
+          {{/if}}
+          <div class="col-6">
+            <button type="button" class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}}
                     disabled={{showLoader}}>
-              {{saveText}}
+              {{submitText}}
             </button>
           </div>
-        {{/if}}
-        <div class="col-3">
-          <button type="button" class="btn btn-success btn-block text-truncate" onClick={{action "submitPad" model}}
-                  disabled={{showLoader}}>
-            {{submitText}}
-          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 {{#if showQuestions}}
   {{questions-list-modal questions=questions onQuestionsHidden=(action "onQuestionsHidden")
                          onSelect=(action 'onSelect')}}
