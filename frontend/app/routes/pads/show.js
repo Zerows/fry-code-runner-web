@@ -4,6 +4,7 @@ import Poller from 'frontend/utils/poller'
 import {inject as service} from '@ember/service';
 import {run} from '@ember/runloop'
 
+
 export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
   poller: Poller.create(),
   websockets: service('socket-io'),
@@ -13,11 +14,14 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
     return this.store.findRecord('pad', params.pad_id);
   },
   setupController(controller, model) {
+    let currentUser = {name: this.session.name, id: this.session.id}
     controller.set('model', model);
     controller.set('result', null);
+    controller.set('users', []);
     const socket = this.websockets.socketFor(this.session.socketUrl(), {
       query: {
-        room: model.slug
+        room: model.slug,
+        user: JSON.stringify(currentUser)
       }
     });
     this.set('socket', socket);
@@ -30,6 +34,20 @@ export default Route.extend(GuestAuthenticatedRouteMixinMixin, {
         this.set('canPublish', true);
       });
     });
+
+    socket.on('users', (message) => {
+      try {
+        let users = message.map((userString, index) => {
+          let user = JSON.parse(userString)
+          user['color'] = this.session.colors[index % 5]
+          return user
+        })
+        this.controller.set('users', users)
+      } catch (error) {
+        alert(error)
+      }
+    })
+
   },
   actions: {
     onEdit(event) {

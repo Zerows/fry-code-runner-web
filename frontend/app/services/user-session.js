@@ -16,7 +16,6 @@ export default Service.extend({
     const url = "/api/auth/login";
     return await this.ajax.post(url, {data: {email: options.email, password: options.password}});
   },
-
   async authenticateGuest(options) {
     const url = "/api/guest";
     return await this.ajax.post(url, {data: {name: options.name}});
@@ -27,21 +26,22 @@ export default Service.extend({
   socketUrl() {
     return this.data.session.userSession.socketUrl
   },
-  languages: reads('data.session.userSession.availableLanguages'),
-  name: reads('data.session.userSession.name'),
-  isMember: computed('data.session.userSession.roles', function () {
-    return hasRole('member')
-  }),
-  hasRole(role) {
+  hasRole(roleName) {
     try {
-      this.data.session.userSession.roles.forEach(element => {
-        if (element.name == role) {
-          return true
-        }
+      let expectedRole = this.data.session.userSession.roles.filter(element => {
+        let role = element.role
+        return role.name == roleName
       });
-      return false
+      return expectedRole.length > 0
     } catch (error) {
       return false
     }
-  }
+  },
+  id: reads('data.session.userSession.id'),
+  languages: reads('data.session.userSession.availableLanguages'),
+  name: reads('data.session.userSession.name'),
+  isMember: computed('data.session.userSession.roles', function () {
+    return this.hasRole('member')
+  }),
+  colors: ['#8FB9A8', '#FEFAD4', '#FCD0BA', '#F1828D', '#765D69'],
 });
