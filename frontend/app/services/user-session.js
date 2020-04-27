@@ -27,21 +27,20 @@ export default Service.extend({
   socketUrl() {
     return this.data.session.userSession.socketUrl
   },
-  languages: reads('data.session.userSession.availableLanguages'),
-  name: reads('data.session.userSession.name'),
-  isMember: computed('data.session.userSession.roles', function () {
-    return hasRole('member')
-  }),
-  hasRole(role) {
+  hasRole(roleName) {
     try {
-      this.data.session.userSession.roles.forEach(element => {
-        if (element.name == role) {
-          return true
-        }
+      let expectedRole = this.data.session.userSession.roles.filter(element => {
+        let role = element.role
+        return role.name == roleName
       });
-      return false
+      return expectedRole.length > 0
     } catch (error) {
       return false
     }
-  }
+  },
+  languages: reads('data.session.userSession.availableLanguages'),
+  name: reads('data.session.userSession.name'),
+  isMember: computed('data.session.userSession.roles', function () {
+    return this.hasRole('member')
+  })
 });
