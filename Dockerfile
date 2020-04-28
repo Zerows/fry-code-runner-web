@@ -9,7 +9,4 @@ WORKDIR /app
 COPY . /app
 
 
-#only for prod
-CMD ["sh", "./entrypoint.sh"]
-
 
