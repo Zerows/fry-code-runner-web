@@ -36,6 +36,7 @@ spec:
       containers:
         - name:  web-app
           image:  shrikanthkr/test-kuber:latest
+          command: ["/bin/sh", "entrypoint.sh"]
           env:
             - name: RAILS_ENV
               value: production
