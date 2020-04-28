@@ -32,12 +32,12 @@ spec:
       labels:
         app: codefry-web
         tier: frontend
-      spec:
-        containers:
-          - name:  web-app
-            image:  shrikanthkr/test-kuber:latest
-            env:
-              - name: RAILS_ENV
-                value: production
-            ports:
-              - containerPort: 3000
+    spec:
+      containers:
+        - name:  web-app
+          image:  shrikanthkr/test-kuber:latest
+          env:
+            - name: RAILS_ENV
+              value: production
+          ports:
+            - containerPort: 3000
