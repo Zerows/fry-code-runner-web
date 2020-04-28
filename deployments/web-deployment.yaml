@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
+  name: web-app
 spec:
   selector:
     app: codefry-web
@@ -10,3 +10,34 @@ spec:
     - protocol: "TCP"
       port: 80
       targetPort: 3000
+    type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  labels:
+    app: codefry-web
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codefry-web
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: codefry-web
+        tier: frontend
+      spec:
+        containers:
+          - name:  web-app
+            image:  shrikanthkr/test-kuber:latest
+            env:
+              - name: RAILS_ENV
+                value: production
+            ports:
+              - containerPort: 3000
