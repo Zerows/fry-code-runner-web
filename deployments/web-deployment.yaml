@@ -40,5 +40,7 @@ spec:
           env:
             - name: RAILS_ENV
               value: production
+            - name: SECRET_KEY_BASE
+              value: 17b251d7a3645316e6f6688ff66263b997dc26419bf1bbbf2cb2678f6d085172668e802ebe7efc8f5dde155a68cc2217dd9995742c481f5fdf9a1bf5cc92b295
           ports:
             - containerPort: 3000
