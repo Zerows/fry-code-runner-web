@@ -57,5 +57,15 @@ spec:
                 configMapKeyRef:
                   name: db-conf
                   key: password
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: port
           ports:
             - containerPort: 3000

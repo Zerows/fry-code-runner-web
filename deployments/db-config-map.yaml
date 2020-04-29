@@ -8,3 +8,4 @@ data:
   name: codefry # name of the database for application
   username: postgres # temporarily using for testing
   password: example # temporarily using for testing
+  port: 5432 # temporarily using for testing
