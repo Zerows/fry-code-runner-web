@@ -28,7 +28,7 @@ spec:
     - ReadWriteOnce #Makes sure the volume is mounted only once by the PODS
   resources:
     requests:
-      storage: .5Gi
+      storage: 2Gi
 
 ---
 
