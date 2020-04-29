@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: socket-app
+spec:
+  selector:
+    app: socket-app
+    tier: frontend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 4500
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-appp
+  labels:
+    app: socket-app
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: socket-app
+        tier: frontend
+    spec:
+      containers:
+        - name:  web-app
+          image:  shrikanthkr/test-kuber-codefry-socket:latest
+          ports:
+            - containerPort: 4500
