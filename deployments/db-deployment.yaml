@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: v1
+apiVersion: v2
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pv-claim # name of PVC essential for identifying the storage data
@@ -28,7 +28,7 @@ spec:
     - ReadWriteOnce #Makes sure the volume is mounted only once by the PODS
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 
 ---
 
