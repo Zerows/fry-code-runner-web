@@ -1,0 +1,10 @@
+# Define 'Configmap' to store non-sensitive database configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-conf  # name of ConfigMap, referenced in other files
+data:
+  host: postgres   # host address of mysql server, we are using DNS of Service
+  name: codefry # name of the database for application
+  username: postgres # temporarily using for testing
+  password: example # temporarily using for testing
