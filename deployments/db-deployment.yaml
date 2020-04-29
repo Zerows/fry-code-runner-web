@@ -74,7 +74,8 @@ spec:
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
           ports:
-            containerPort: 5432
+          - containerPort: 5432
+            name: postgres
           volumeMounts:
             - name: pg-persistent-storage
               mountPath: /var/lib/postgresql
