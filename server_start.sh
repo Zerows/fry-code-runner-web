@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-bundle install
+bundle install --without test development
 bundle exec rake ember:install
 cd frontend && npm install
 echo "Starting rails"
