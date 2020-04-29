@@ -38,6 +38,6 @@ spec:
           image:  shrikanthkr/test-kuber-codefry-socket:latest
           env:
             - name: PORT
-              value: 4500
+              value: "4500"
           ports:
             - containerPort: 4500
