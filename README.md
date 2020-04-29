@@ -52,10 +52,16 @@ IF rails not working inside the container
 > Edit Config -> Add Remote ruby config -> ![Run Config Image](readme/images/remote_debug_config.png)
 
 
-## Production Deployment
+## Production Deployment Commands
 
-1. export POSTGRES_PASSWORD="example" && export SECRET_KEY_BASE="1e7c79f719c7b273c06232d5176416cb6076e7bb6e5a70eed72d49918dd27b6aaf5d8ef85b60092c28bcd7813c0fc81427b6ed9d0241d8a048cb2afc31e34151" && docker-compose -f docker-compose.yml -f docker-compose.production.yml up
+> kubectl delete deployment web-app
 
-2. docker-compose build web (to build web service separately)
+> git pull origin master
 
-3. docker-compose up --no-deps -d web (to restart web alone without affecting other dependent services)
+> kubectl apply -f web-deployment.yaml
+
+> kubectl get pods
+
+> kubectl logs -f web-app-596875796f-zcrm7 -c web-app
+
+> kubectl exec -it web-app-596875796f-zcrm7 -- /bin/bash
