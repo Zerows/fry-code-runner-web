@@ -36,7 +36,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  tier: database
+  labels:
+    name: postgres
+    tier: database
 spec:
   selector:
     matchLabels:
