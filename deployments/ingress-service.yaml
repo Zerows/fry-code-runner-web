@@ -13,7 +13,7 @@ spec:
               serviceName: web-app
               servicePort: 80
     - host: socket.zingseven.com
-        http:
+      http:
         paths:
           - backend:
             serviceName: socket-app
