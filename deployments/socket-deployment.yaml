@@ -7,12 +7,15 @@ spec:
     app: socket-app
     tier: frontend
   ports:
-    - protocol: "TCP"
+    - name: http
+      protocol: "TCP"
       port: 80
       targetPort: 4500
-    - protocol: "TCP"
+    - name: https
+      protocol: "TCP"
       port: 443
       targetPort: 4500
+
   type: NodePort
 
 ---
