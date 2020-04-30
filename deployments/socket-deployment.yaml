@@ -10,6 +10,9 @@ spec:
     - protocol: "TCP"
       port: 80
       targetPort: 4500
+    - protocol: "TCP"
+      port: 443
+      targetPort: 4500
   type: NodePort
 
 ---
