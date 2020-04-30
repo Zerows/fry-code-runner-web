@@ -8,13 +8,13 @@ spec:
   rules:
     - host: zingseven.com
       http:
-        paths:
-        - backend:
-            serviceName: web-app
-            servicePort: 80
+        paths: /
+          - backend:
+              serviceName: web-app
+              servicePort: 80
     - host: socket.zingseven.com
       http:
-        paths:
-        - backend:
-            serviceName: socket-app
-            servicePort: 80
+        paths: /
+          - backend:
+              serviceName: socket-app
+              servicePort: 80
