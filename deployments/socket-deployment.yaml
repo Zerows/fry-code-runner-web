@@ -42,12 +42,12 @@ spec:
               value: "4500"
           ports:
             - containerPort: 4500
-            readinessProbe:
-              httpGet:
-                port: 4500
-                path: /healthz
-              initialDelaySeconds: 1
-              periodSeconds: 5
-              timeoutSeconds: 4
-              successThreshold: 2
-              failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              port: 4500
+              path: /healthz
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            timeoutSeconds: 4
+            successThreshold: 2
+            failureThreshold: 3
