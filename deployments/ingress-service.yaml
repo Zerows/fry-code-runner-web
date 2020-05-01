@@ -7,7 +7,14 @@ spec:
     - host: zingseven.com
       http:
         paths:
-          - backend:
+          - path: /
+            backend:
               serviceName: socket-app
               servicePort: 80
-
+    - host: socket.zingseven.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: socket-app
+              servicePort: 80
