@@ -9,7 +9,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: socket-app
+              serviceName: web-app
               servicePort: 80
     - host: socket.zingseven.com
       http:
