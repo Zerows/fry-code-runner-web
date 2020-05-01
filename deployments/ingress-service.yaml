@@ -10,4 +10,4 @@ spec:
           - backend:
               serviceName: web-app
               servicePort: 80
-            path: /
+            path: /static_pages/health
