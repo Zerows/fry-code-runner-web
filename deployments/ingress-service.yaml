@@ -6,15 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: zingseven.com
-      http:
-        paths:
-          - backend:
-              serviceName: web-app
-              servicePort: 80
-            path: /
-    - host: socket.zingseven.com
-      http:
+    - http:
         paths:
           - backend:
               serviceName: socket-app
