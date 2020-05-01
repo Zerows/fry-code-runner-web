@@ -69,9 +69,9 @@ spec:
           readinessProbe:
             httpGet:
               port: 3000
-              path: /
+              path: /static_pages/health
             initialDelaySeconds: 1
-            periodSeconds: 5
-            timeoutSeconds: 4
+            periodSeconds: 60
+            timeoutSeconds: 30
             successThreshold: 2
             failureThreshold: 3
