@@ -8,6 +8,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: web-app
+              serviceName: socket-app
               servicePort: 80
-            path: /static_pages/health
+
