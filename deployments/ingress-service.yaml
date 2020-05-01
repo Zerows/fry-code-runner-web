@@ -10,6 +10,13 @@ spec:
       http:
         paths:
           - backend:
+              serviceName: web-app
+              servicePort: 80
+            path: /
+    - host: zingseven.com
+      http:
+        paths:
+          - backend:
               serviceName: socket-app
               servicePort: 80
             path: /sockets
