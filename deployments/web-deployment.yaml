@@ -66,3 +66,12 @@ spec:
               value: "5432"
           ports:
             - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: /
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            timeoutSeconds: 4
+            successThreshold: 2
+            failureThreshold: 3
