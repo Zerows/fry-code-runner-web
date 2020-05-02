@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabitmq-app
+spec:
+  clusterIP: None
+  selector:
+    app: rabitmq-app
+    tier: backend
+  ports:
+    - name: http    # A ClusterIP will prevent resolving dns requests for other pods
+      protocol: TCP # under the same service.
+      port: 15672
+      targetPort: 15672
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabitmq-app
+  labels:
+    app: rabitmq-app
+    tier: backend
+spec:
+  serviceName: rabbitmq
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabitmq-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: rabitmq-app
+        tier: backend
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name:  rabbitmq-app
+          image:  rabbitmq:3.7.19-alpine
+          ports:
+            - name: amqp
+              protocol: TCP
+              containerPort: 5672
+            - name: http
+              protocol: TCP
+              containerPort: 15672
+          volumeMounts:
+            - name: rabbitmq-persistent-storage
+              mountPath: /var/lib/rabbitmq
+  volumeClaimTemplates:
+    - metadata:
+        name: rabbitmq-persistent-storage
+        annotations:
+          volume.beta.kubernetes.io/storage-class: standard
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

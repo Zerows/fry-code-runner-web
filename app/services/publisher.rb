@@ -9,7 +9,7 @@ class Publisher
   end
 
   def self.connection
-    @connection ||= Bunny.new(:host => "rabbitmq").tap do |c|
+    @connection ||= Bunny.new(:host => ENV["QUEUE_HOST"] || "rabbitmq").tap do |c|
       c.start
     end
   end

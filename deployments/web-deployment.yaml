@@ -66,6 +66,11 @@ spec:
                   key: host
             - name: DB_PORT
               value: "5432"
+            - name: QUEUE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: queue-conf
+                  key: host
           ports:
             - containerPort: 3000
           readinessProbe:

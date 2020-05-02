@@ -42,9 +42,6 @@ spec:
                   name: db-conf
                   key: password
             - name: QUEUE_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: db-conf
-                  key: password
+              value: "java"
             - name: QUEUE_PORT
-              value: "6666"
+              value: "5672"
