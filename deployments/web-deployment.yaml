@@ -38,6 +38,7 @@ spec:
       containers:
         - name:  web-app
           image:  shrikanthkr/test-kuber:latest
+          imagePullPolicy: Always
           command: ["/bin/sh", "entrypoint.sh"]
           env:
             - name: RAILS_ENV
