@@ -39,8 +39,8 @@ spec:
             - name: QUEUE_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: db-conf
-                  key: password
+                  name: queue-conf
+                  key: host
             - name: QUEUE_NAME
               value: "java"
             - name: QUEUE_PORT
