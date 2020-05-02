@@ -1,2 +1,2 @@
-socket_url: ws://35.224.215.124
+socket_url: ws://socket.zingseven.com
 languages: ["java", "ruby", "javascript", "python", "scala"]
