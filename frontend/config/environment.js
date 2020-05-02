@@ -38,7 +38,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.cookieDomain = 'localhost';
+    ENV.cookieDomain = 'localhost';
   }
 
   if (environment === 'test') {
@@ -55,7 +55,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-    ENV.APP.cookieDomain = '.zingseven.com';
+    ENV.cookieDomain = '.zingseven.com';
   }
 
   return ENV;
