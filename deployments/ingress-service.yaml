@@ -3,8 +3,11 @@ kind: Ingress
 metadata:
   name: exposed-ingress
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($host = 'www.zingseven.com' ) {
+        rewrite ^ 'zingseven.com';
+      }
 spec:
   rules:
     - host: zingseven.com
