@@ -36,3 +36,18 @@ spec:
                 configMapKeyRef:
                   name: db-conf
                   key: password
+            - name: QUEUE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
+            - name: QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
+            - name: QUEUE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
