@@ -21,11 +21,11 @@ spec:
         - name:  code-runner-app
           image:  shrikanthkr/test-kuber-code-runner:latest
           env:
-            - name: DATABASE
+            - name: DB_URL
               valueFrom:
                 configMapKeyRef:
                   name: db-conf
-                  key: name
+                  key: url
             - name: DB_USERNAME
               valueFrom:
                 configMapKeyRef:
