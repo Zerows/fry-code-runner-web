@@ -4,6 +4,12 @@ metadata:
   name: exposed-ingress
 spec:
   rules:
+    - host: socket.zingseven.com
+      http:
+        paths:
+          - backend:
+              serviceName: socket-app
+              servicePort: 80
     - host: zingseven.com
       http:
         paths:
