@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   rules:
-    - host: zingseven.com
+    - host: www.zingseven.com
       http:
         paths:
           - path: /*
