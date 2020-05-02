@@ -2,8 +2,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: exposed-ingress
-  annotations:
-    kubernetes.io/ingress.class: "nginx-ingress"
 spec:
   rules:
     - host: zingseven.com
@@ -20,8 +18,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: exposed-ingress-socket
-  annotations:
-    kubernetes.io/ingress.class: "nginx-ingress"
 spec:
   rules:
     - host: socket.zingseven.com
