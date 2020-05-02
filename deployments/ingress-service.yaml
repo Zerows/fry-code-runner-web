@@ -19,15 +19,15 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: exposed-ingress
+  name: exposed-ingress-socket
   annotations:
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
-    - host: www.zingseven.com
+    - host: socket.zingseven.com
       http:
         paths:
           - path: /*
             backend:
-              serviceName: web-app
+              serviceName: socket-app
               servicePort: 80
