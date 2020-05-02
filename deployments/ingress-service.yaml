@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: exposed-ingress
   annotations:
+    kubernetes.io/ingress.class: "gce"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($host = 'www.zingseven.com' ) {
         rewrite ^ zingseven.com$request_uri permanent;
