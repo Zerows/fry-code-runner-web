@@ -8,5 +8,5 @@ data:
   name: codefry # name of the database for application
   username: postgres # temporarily using for testing
   password: example # temporarily using for testing
-  url: jdbc:postgresql://postgres:5432/postgres # temporarily using for testing
+  url: jdbc:postgresql://postgres:5432/codefry # temporarily using for testing
 
