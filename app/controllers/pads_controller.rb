@@ -42,7 +42,7 @@ class PadsController < ApplicationController
     result.save
 
     msg = {:id => pad.id, :result_id => result[:id]}
-    Publisher.publish(msg)
+    Publisher.publish(msg, pad.language)
 
     render json: result
 

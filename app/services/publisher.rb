@@ -1,6 +1,6 @@
 class Publisher
-  def self.publish(msg)
-    q = channel.queue("rpc_queue",{:auto_delete => false, durable: true, exclusive: false})
+  def self.publish(msg, queue)
+    q = channel.queue(queue, {:auto_delete => false, durable: true, exclusive: false})
     q.publish(JSON.generate(msg), :routing_key => q.name)
   end
 

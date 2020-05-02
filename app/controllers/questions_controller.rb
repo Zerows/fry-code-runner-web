@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
     begin
       result = helpers.update_question_and_submit(question, update_question_params)
       msg = {:id => question.pad.id, :result_id => result[:id]}
-      Publisher.publish(msg)
+      Publisher.publish(msg, question.pad.language)
       render json: result
     rescue Exception => e
       raise(ExceptionHandler::QuestionRunError, (e.message unless e.nil?))
