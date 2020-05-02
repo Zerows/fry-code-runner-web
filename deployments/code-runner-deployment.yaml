@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-runner-app
+  labels:
+    app: code-runner-app
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-runner-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: code-runner-app
+        tier: backend
+    spec:
+      containers:
+        - name:  code-runner-app
+          image:  shrikanthkr/test-kuber-code-runner:latest
+          env:
+            - name: DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: name
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
