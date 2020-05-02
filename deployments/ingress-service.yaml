@@ -7,7 +7,6 @@ spec:
     - host: zingseven.com
       http:
         paths:
-          - path: /*
-            backend:
+          - backend:
               serviceName: web-app
               servicePort: 80
