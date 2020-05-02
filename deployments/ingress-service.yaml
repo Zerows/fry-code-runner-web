@@ -4,13 +4,27 @@ metadata:
   name: exposed-ingress
   annotations:
     kubernetes.io/ingress.class: "gce"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($host = 'www.zingseven.com' ) {
-        rewrite ^ zingseven.com$request_uri permanent;
-      }
 spec:
   rules:
     - host: zingseven.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: web-app
+              servicePort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: exposed-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+spec:
+  rules:
+    - host: www.zingseven.com
       http:
         paths:
           - path: /*
