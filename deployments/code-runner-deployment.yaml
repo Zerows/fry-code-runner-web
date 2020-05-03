@@ -20,6 +20,7 @@ spec:
       containers:
         - name:  java-runner
           image:  zerows/java-runner:latest
+          imagePullPolicy: Always
           env:
             - name: DB_URL
               valueFrom:
@@ -70,6 +71,7 @@ spec:
       containers:
         - name:  ruby-runner
           image:  zerows/ruby-runner:latest
+          imagePullPolicy: Always
           env:
             - name: DB_URL
               valueFrom:
@@ -120,6 +122,7 @@ spec:
       containers:
         - name:  javascript-runner
           image:  zerows/javascript-runner:latest
+          imagePullPolicy: Always
           env:
             - name: DB_URL
               valueFrom:
@@ -171,6 +174,7 @@ spec:
       containers:
         - name:  python-runner
           image:  zerows/python-runner:latest
+          imagePullPolicy: Always
           env:
             - name: DB_URL
               valueFrom:
