@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: code-runner-app
+  name: java-runner
   labels:
-    app: code-runner-app
+    app: java-runner
     tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: code-runner-app
+      app: java-runner
       tier: backend
   template:
     metadata:
       labels:
-        app: code-runner-app
+        app: java-runner
         tier: backend
     spec:
       containers:
-        - name:  code-runner-app
-          image:  shrikanthkr/test-kuber-code-runner:latest
+        - name:  java-runner
+          image:  zerows/java-runner:latest
           env:
             - name: DB_URL
               valueFrom:
@@ -43,5 +43,156 @@ spec:
                   key: host
             - name: QUEUE_NAME
               value: "java"
+            - name: QUEUE_PORT
+              value: "5672"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ruby-runner
+  labels:
+    app: ruby-runner
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ruby-runner
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: ruby-runner
+        tier: backend
+    spec:
+      containers:
+        - name:  ruby-runner
+          image:  zerows/ruby-runner:latest
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: url
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
+            - name: QUEUE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: queue-conf
+                  key: host
+            - name: QUEUE_NAME
+              value: "ruby"
+            - name: QUEUE_PORT
+              value: "5672"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javascript-runner
+  labels:
+    app: javascript-runner
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javascript-runner
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: javascript-runner
+        tier: backend
+    spec:
+      containers:
+        - name:  javascript-runner
+          image:  zerows/javascript-runner:latest
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: url
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
+            - name: QUEUE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: queue-conf
+                  key: host
+            - name: QUEUE_NAME
+              value: "javascript"
+            - name: QUEUE_PORT
+              value: "5672"
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-runner
+  labels:
+    app: python-runner
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-runner
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: python-runner
+        tier: backend
+    spec:
+      containers:
+        - name:  python-runner
+          image:  zerows/python-runner:latest
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: url
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: password
+            - name: QUEUE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: queue-conf
+                  key: host
+            - name: QUEUE_NAME
+              value: "python"
             - name: QUEUE_PORT
               value: "5672"
