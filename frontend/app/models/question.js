@@ -6,6 +6,7 @@ export default Model.extend({
   language: attr('string'),
   difficulty: attr(),
   slug: attr('string'),
+  description: attr('string'),
 
   dryRun() {
     const adapter = this.store.adapterFor(this.constructor.modelName);

@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def update_question_params
-    params.require(:question).permit(:content, :language, :title, :difficulty)
+    params.require(:question).permit(:content, :language, :title, :difficulty, :description)
   end
 
 end

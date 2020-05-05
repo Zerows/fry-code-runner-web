@@ -62,6 +62,6 @@ class PadsController < ApplicationController
   end
 
   def update_pads_params
-    params.require(:pad).permit(:content, :language, :filename)
+    params.require(:pad).permit(:content, :language, :filename, :info)
   end
 end
