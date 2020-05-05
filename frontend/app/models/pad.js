@@ -5,6 +5,7 @@ export default Model.extend({
   language: attr('string'),
   filename: attr('string'),
   slug: attr('string'),
+  info: attr('string'),
 
   submit() {
     const adapter = this.store.adapterFor(this.constructor.modelName);

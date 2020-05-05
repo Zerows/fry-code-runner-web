@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Rails console: fry-code-runner-web" type="IrbRunConfigurationType" factoryName="IRB console">
+    <module name="fry-code-runner-web" />
+    <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+    <IRB_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+    <IRB_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+    <IRB_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+    <IRB_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+    <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+    <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+    <EXTENSION ID="RubyDockerContainerSettingsRunConfigurationExtension" dockerComposeCommand="RUN" />
+    <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/bin/rails" />
+    <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="console -e development -- --prompt simple" />
+    <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="true" />
+    <method v="2" />
+  </configuration>
+</component>

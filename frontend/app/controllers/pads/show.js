@@ -36,6 +36,7 @@ export default Controller.extend({
   setDelta(editorDeltas) {
     this.editor.getSession().getDocument().applyDeltas(editorDeltas);
   },
+  showDescription: false,
   actions: {
     submitPad(pad) {
       this.send('submitPadAction', pad);
@@ -61,9 +62,16 @@ export default Controller.extend({
       let model = this.model;
       model.setProperties({
         'content': question.content,
-        'language': question.language
+        'language': question.language,
+        "info": question.description
       });
       this.set('showQuestions', false);
+    },
+    toggleDescription() {
+      this.set('showDescription', !this.showDescription)
+    },
+    onDescriptionHide() {
+      this.set('showDescription', false)
     }
   },
 });

@@ -35,9 +35,25 @@
                 value=model.content
                 update=(action 'onUpdate')}}
       </div>
-      <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding">
+      <div class="col-6 col-lg-6 col-md-6 col-sm-10 no-padding separator">
+        <div class='description-editor p-1 form-group' style={{html-safe
+                (concat "height:" (concat (divide-by height 2) 'px') ";")}}>
+          {{#if showPreview}}
+            {{#bs-button type="outline-primary" class='btn-sm pull-right m-2' onClick=(action 'togglePreview')}}
+              {{fa-icon 'edit'}}
+            {{/bs-button}}
+            {{markdown-to-html model.description}}
+          {{else}}
+            {{#bs-button type="outline-primary" class='btn-sm pull-right m-2' onClick=(action 'togglePreview')}}
+              {{fa-icon 'eye'}}
+            {{/bs-button}}
+            {{textarea value=model.description}}
+          {{/if}}
+
+        </div>
         <div>
-          {{#result-container class='code-output' result=result  height=height }}{{/result-container}}
+          {{#result-container class='code-output p-1' result=result
+                              height=(concat (divide-by height 2) 'px') }}{{/result-container}}
         </div>
       </div>
     </div>
