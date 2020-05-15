@@ -54,7 +54,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-    ENV.cookieDomain = '.zingseven.com';
+    ENV.cookieDomain = '.code-fry.in';
   }
 
   return ENV;
