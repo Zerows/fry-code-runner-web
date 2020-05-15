@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     scope 'pads', controller: 'pads' do
       get '/', :action => 'index'
       post '/', :action => 'create'
+      post '/guest', :action => 'guest_create'
       get '/:pad_id', :action => 'show'
       put '/:pad_id', :action => 'update'
       delete '/:pad_id', :action => 'delete'

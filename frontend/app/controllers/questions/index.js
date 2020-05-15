@@ -17,5 +17,8 @@ export default Controller.extend({
     onPickerHidden() {
       this.set('showLanguagePicker', false);
     },
+    onGuestCreate(question) {
+      this.send('createPadAction', question);
+    }
   }
 });

@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
 
-  before_action do
+  before_action only: [:index] do
+    auth_as(:guest)
+  end
+
+  before_action only: [:show, :create, :update, :delete, :dry_run] do
     auth_as(:member)
   end
 

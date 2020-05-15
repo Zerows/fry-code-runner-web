@@ -4,12 +4,12 @@ class PadsController < ApplicationController
     auth_as(:member)
   end
 
-  before_action only: [:update, :show, :submit] do
+  before_action only: [:update, :show, :submit, :guest_create] do
     auth_as(:guest)
   end
 
   def index
-    pads = current_user.pads.take(10)
+    pads = Pad.all
     if pads.empty?
       render json: {"pads": []}
     else
@@ -23,6 +23,11 @@ class PadsController < ApplicationController
   end
 
   def create
+    pad = current_user.pads.create!(create_pads_params)
+    render json: pad
+  end
+
+  def guest_create
     pad = current_user.pads.create!(create_pads_params)
     render json: pad
   end
@@ -56,9 +61,10 @@ class PadsController < ApplicationController
   private
   def create_pads_params
     title = Faker::Book.title
-    params.require(:pad).permit(:content, :language)
+    params.require(:pad).permit(:content, :language, :info)
         .merge(filename: title)
-        .merge(content: "//#{title}")
+        .merge(content: "//#{params[:pad][:content]}")
+        .merge(info: params[:pad][:info])
   end
 
   def update_pads_params

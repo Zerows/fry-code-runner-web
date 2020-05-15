@@ -10,5 +10,9 @@ export default Model.extend({
   submit() {
     const adapter = this.store.adapterFor(this.constructor.modelName);
     return adapter.submit(this);
+  },
+  createGuestPad() {
+    const adapter = this.store.adapterFor(this.constructor.modelName);
+    return adapter.createGuestPad(this);
   }
 });

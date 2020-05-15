@@ -29,7 +29,6 @@ module.exports = function(environment) {
     store: 'simple-auth-session-store:local-storage',
     authorizer: 'authorizer:custom',
     crossOriginWhitelist: ['http://localhost:3000/'],
-    routeAfterAuthentication: '/pads'
   };
 
   if (environment === 'development') {

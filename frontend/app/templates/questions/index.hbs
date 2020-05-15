@@ -5,38 +5,60 @@
     {{/if}}
   </div>
 
-  <div class="row justify-content-end">
-    <div class="m-3">
-      {{#bs-button class='pull-right' type="success" onClick=(action "onCreateQuestion") disabled=showLoading}}
-        Create Question
-      {{/bs-button}}
+  {{#if userSession.isMember}}
+    <div class="row justify-content-end">
+      <div class="m-3">
+        {{#bs-button class='pull-right' type="success" onClick=(action "onCreateQuestion") disabled=showLoading}}
+          Create Question
+        {{/bs-button}}
+      </div>
     </div>
-  </div>
+  {{else}}
+    <h4 class="mb-2 pb-3">Pick a Question</h4>
+  {{/if}}
   <div class="row">
     <table class="table">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Language</th>
-          <th scope="col">Difficulty</th>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Language</th>
+        <th scope="col">Difficulty</th>
+        {{#if userSession.isMember}}
           <th scope="col">{{fa-icon 'wrench'}}</th>
-        </tr>
+        {{else}}
+          <th scope="col">{{fa-icon 'check'}}</th>
+        {{/if}}
+      </tr>
       </thead>
       <tbody>
-        {{#each model as |rec index|}}
+      {{#each model as |rec index|}}
         <tr>
           <td scope="col">{{index}}</td>
-          <td scope="col">{{#link-to 'questions.show' rec.slug}}{{ concat rec.title }}{{/link-to}}</td>
+          {{#if userSession.isMember}}
+            <td scope="col">{{#link-to 'questions.show' rec.slug}}{{ concat rec.title }}{{/link-to}}</td>
+          {{else}}
+            <td scope="col">
+              <label> {{ concat rec.title }}</label>
+            </td>
+          {{/if}}
           <td scope="col">{{capitalize rec.language}}</td>
           <td scope="col">{{capitalize rec.difficulty}}</td>
-          <td scope="col">
-            {{#bs-button outline=true type="danger" onClick=(action "deleteQuestion" rec)}}
-              {{fa-icon 'trash'}}
-            {{/bs-button}}
-          </td>
+          {{#if userSession.isMember}}
+            <td scope="col">
+              {{#bs-button outline=true type="danger" onClick=(action "deleteQuestion" rec)}}
+                {{fa-icon 'trash'}}
+              {{/bs-button}}
+            </td>
+          {{else}}
+            <td scope="col">
+              {{#bs-button outline=true type="info" onClick=(action "onGuestCreate" rec)}}
+                {{fa-icon 'caret-right'}}
+              {{/bs-button}}
+            </td>
+          {{/if}}
         </tr>
-        {{/each}}
+      {{/each}}
       </tbody>
     </table>
   </div>
