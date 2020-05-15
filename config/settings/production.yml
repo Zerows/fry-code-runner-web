@@ -1,2 +1,2 @@
-socket_url: ws://socket.zingseven.com
+socket_url: ws://socket.code-fry.in
 languages: ["java", "ruby", "javascript", "python", "scala"]
